@@ -261,11 +261,6 @@ void loop()
       
       if (serInString[0] == 72)
       {
-        digitalWrite(5,HIGH);
-        digitalWrite(6,LOW);
-        delay(100);
-        digitalWrite(5,LOW);
-        digitalWrite(6,LOW);
         dacon();
         gstat_H = true;
 
@@ -627,12 +622,7 @@ void galvanostat()
       adc = analogRead(0);
       dac = analogRead(1);
       
-      digitalWrite(5,HIGH);
-      digitalWrite(6,LOW);
-      delay(100);
-      digitalWrite(5,LOW);
-      digitalWrite(6,LOW);
-      delay(100);
+
     
       int move = 1;
       int diff = 0;
@@ -688,11 +678,7 @@ void high_galvanostat()
       current_adc = betteranaread(4);
       adcgnd = betteranaread(2);
       
-      digitalWrite(5,HIGH);
-      digitalWrite(6,LOW);
-      delay(100);
-      digitalWrite(5,LOW);
-      digitalWrite(6,LOW);
+
       int move = 1;
       float diff = 0;
     
