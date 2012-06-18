@@ -508,6 +508,7 @@ function galvanostat(current)
 function galvanostat_highcurrent(current) {
 	delta_potential = (current/coefficient)*resistance
 	value_to_ardustat = delta_potential / volts_per_tick;
+	toArd("r",parseInt(0))
 	toArd("H",parseInt(value_to_ardustat))
 }
 
