@@ -55,7 +55,7 @@ else queue_write_rate = process.argv[5]
 resistance=587.6
 coefficient=475
 error=0
-currrent_threshold = 0.01 //threshold in Amps to switch from low-current to high-current mode
+current_threshold = 0.01 //threshold in Amps to switch from low-current to high-current mode
 high_current = false
 
 //MongoDB stuff
