@@ -625,6 +625,7 @@ function data_parse(data)
 		out['resistance'] = res_table[out['res_set']]
 		current = (out['dac_potential']-out['cell_potential'])/out['resistance']
 		if (mode == 1) out['current'] = 0
+		else if (high_current) out['current'] = out['Current_pin']
 		else out['current'] = current
 	}
 	
