@@ -22,7 +22,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
 fi
 if [[ "$unamestr" == 'Darwin' ]]; then
 	arduinos=`ls -d /dev/* | grep tty.usbmodem*`
-	numofarduinos=`ls -d /dev/* | grep tty.usbmodem* | wc -l`  #Number of results returned
+	numofarduinos=`ls -d /dev/* | grep tty.usbmodem* | wc -l | sed -e 's/^[ \t]*//'`  #Number of results returned
 fi
 if [[ $arduinos == "" ]]; then
 	echo No arduinos found
