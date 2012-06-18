@@ -493,9 +493,11 @@ function moveground(value)
 function galvanostat(value)
 {
 	if (value >= current_threshold) {
+		if(high_current == false) console.log("Switching to high current mode")
 		high_current = true
 	}
 	else {
+		if(high_current) console.log("Switching to low current mode")
 		high_current = false
 	}
 	if (high_current) {
