@@ -55,7 +55,7 @@ else queue_write_rate = process.argv[5]
 resistance=587.6
 coefficient=475
 error=0
-currrent_threshold = 0.01 //threshold in Amps to switch from low-current to high-current mode
+current_threshold = 0.01 //threshold in Amps to switch from low-current to high-current mode
 high_current = false
 
 //MongoDB stuff
@@ -493,9 +493,11 @@ function moveground(value)
 function galvanostat(value)
 {
 	if (value >= current_threshold) {
+		if(high_current == false) console.log("Switching to high current mode")
 		high_current = true
 	}
 	else {
+		if(high_current) console.log("Switching to low current mode")
 		high_current = false
 	}
 	if (high_current) {
@@ -625,6 +627,7 @@ function data_parse(data)
 		out['resistance'] = res_table[out['res_set']]
 		current = (out['dac_potential']-out['cell_potential'])/out['resistance']
 		if (mode == 1) out['current'] = 0
+		else if (high_current) out['current'] = out['Current_pin']
 		else out['current'] = current
 	}
 	

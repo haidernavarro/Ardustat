@@ -28,8 +28,7 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 1. Install Version of Firmware 10s on your ardustat (Firmware/firmware\_10s/)
 2. On Mac OS X and Linux, execute
 	- bash startArdustat.sh
-<br> (On Windows, execute Ardustat\_Control/initializeNodeJS.bat and Ardustat\_Viewer/initializeNodeJS.bat, then go to the 
-Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
+<br> (On Windows, execute firstRun.bat, then go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 3. In a browser, go to http://localhost:8888/debug
 	(stuff should be happening)
 4. We now need to calibrate the ardustat.  Put a quality resistor of known value between the working and counter clips, and then attach the reference clip to the counter clip
