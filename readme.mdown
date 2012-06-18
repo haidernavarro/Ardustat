@@ -14,20 +14,22 @@ Balasubramanian is supported by NSF CMMI 1031208
 
 ###Installation:
 ####Software that you need to have installed to use the ardustat:
-- Arduino (http://arduino.cc/en/Main/Software)
-- FTDI Drivers / Arduino Uno Drivers, depending on which version of arduino you are using (see Getting Started guide for arduino at http://arduino.cc/en/Guide/HomePage).
-- We're now a node shop.  
-   - Get node [here](http://nodejs.org/)
-   - Get mongodb [here](http://www.mongodb.org/downloads)
+- [Arduino] (http://arduino.cc/en/Main/Software)
+- FTDI Drivers / Arduino Uno Drivers, depending on which version of arduino you are using (see [Getting Started guide for 
+arduino] (http://arduino.cc/en/Guide/HomePage)).
+- [Python 2] (http://www.python.org/download/releases/2.7.2/)
+- [Node.JS] (http://nodejs.org)
+- [MongoDB] (http://www.mongodb.org/downloads)
 - If you use Windows, you'll also need to install [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express)
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
 	
 ###Instructions for first run:
-1. Install Version of Firmware 10s on your ardustat (Firmware/firmware_10s/)
+1. Install Version of Firmware 10s on your ardustat (Firmware/firmware\_10s/)
 2. On Mac OS X and Linux, execute
 	- bash startArdustat.sh
-   (On Windows, execute Ardustat_Control/initializeNodeJS.bat and Ardustat_Viewer/initializeNodeJS.bat, then go to the Ardustat_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
+   (On Windows, execute Ardustat\_Control/initializeNodeJS.bat and Ardustat\_Viewer/initializeNodeJS.bat, then go to the 
+Ardustat_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 3. In a browser, go to http://localhost:8888/debug
 	(stuff should be happening)
 4. We now need to calibrate the ardustat.  Put a quality resistor of known value between the working and counter clips, and then attach the reference clip to the counter clip
@@ -41,7 +43,8 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 9. Now go to http://localhost:8888.  You should now see the Potential and Current trace.  Play with the the potentiostsat and galvanostat settings.
 
 From here on out, all you need to do is start startArdustat.sh and then go to http://localhost:8888
-(on Windows, you'll still need to go to the Ardustat_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
+(on Windows, you'll still need to go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 
+with your arduino's actual COM port))
 
 
 ##Now with basic cycling
