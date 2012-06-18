@@ -23,10 +23,11 @@ Balasubramanian is supported by NSF CMMI 1031208
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
 	
-###Instructions for first run: (OS X and Linux)
+###Instructions for first run:
 1. Install Version of Firmware 10s on your ardustat (Firmware/firmware_10s/)
-2. In the NodeJS directory, type
-	- bash expressserver-wrapper.sh
+2. On Mac OS X and Linux, execute
+	- bash startArdustat.sh
+   (On Windows, execute Ardustat_Control/initializeNodeJS.bat and Ardustat_Viewer/initializeNodeJS.bat, then go to the Ardustat_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 3. In a browser, go to http://localhost:8888/debug
 	(stuff should be happening)
 4. We now need to calibrate the ardustat.  Put a quality resistor of known value between the working and counter clips, and then attach the reference clip to the counter clip
@@ -38,10 +39,9 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 7. You should see the graph changing, the yellow line should slope downwards and then reset 3 time. 
 8. Your ardustat is now calibrated.  You won't have to do this again (unless you delete the calibration file or feel that the values were inaccurate)
 9. Now go to http://localhost:8888.  You should now see the Potential and Current trace.  Play with the the potentiostsat and galvanostat settings.
-	
-Note: If you use Windows, the instructions are the same, except that on your first run, you should execute the shell script initializeNodeJS.bat in the NodeJS directory. You will also need to input your arduino's device file name manually, so instead of typing 'bash expressserver-wrapper.sh', type 'node expressserver.js <YOUR-ARDUINO>' where <YOUR-ARDUINO> is something like COM3 or COM4
 
-From here on out, all you need to down is start expressserver-wrapper.sh and then go to http://localhost:8888
+From here on out, all you need to do is start startArdustat.sh and then go to http://localhost:8888
+(on Windows, you'll still need to go to the Ardustat_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 
 
 ##Now with basic cycling
