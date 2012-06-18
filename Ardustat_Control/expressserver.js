@@ -490,55 +490,48 @@ function moveground(value)
 }
 
 //Set Galvanostat
-function galvanostat(value)
+function galvanostat(current)
 {
 	if (value >= current_threshold) {
 		if(high_current == false) console.log("Switching to high current mode")
 		high_current = true
+		galvanostat_highcurrent(current)
 	}
 	else {
 		if(high_current) console.log("Switching to low current mode")
 		high_current = false
+		galvanostat_lowcurrent(current)
 	}
-	if (high_current) {
-		val=(value/coefficient)*resistance
-	}
-	foovalue = Math.abs(value)
-	//First Match R
-	r_guess = .1/foovalue
-	//console.log(r_guess)
-	target = 1000000
-	r_best = 0
-	set_best = 0
-	for (var key in res_table)
-	{
-		if (Math.abs(r_guess-res_table[key]) < target)
-		{
-			//console.log("got something better")
-			target = Math.abs(r_guess-res_table[key]) 
-			r_best = res_table[key]
-			set_best = key
-			
-		}
-	} 
-
-	//now solve for V
-	if (high_current) {
-		delta_potential = val
-	}
-	else {
-		delta_potential = value*r_best
-	}
-	//console.log(r_best)
-	//console.log(set_best)
-	//console.log(delta_potential)
-	
-	value_to_ardustat = delta_potential / volts_per_tick;
-	toArd("r",parseInt(set_best))
-	toArd("g",parseInt(value_to_ardustat))
-	toArd("r",parseInt(set_best))
-	toArd("g",parseInt(value_to_ardustat))
 	console.log("Set galvanostat to",value)
+}
+
+function galvanostat_highcurrent(current) {
+	delta_potential = (current/coefficient)*resistance
+	value_to_ardustat = delta_potential / volts_per_tick;
+	toArd("H",parseInt(value_to_ardustat))
+}
+
+function galvanostat_lowcurrent(current) {
+		//First Match R
+		r_guess = .1/Math.abs(current)
+		//console.log(r_guess)
+		target = 1000000
+		r_best = 0
+		set_best = 0
+		for (var key in res_table)
+		{
+			if (Math.abs(r_guess-res_table[key]) < target)
+			{
+				target = Math.abs(r_guess-res_table[key]) 
+				r_best = res_table[key]
+				set_best = key
+			}
+		}
+		delta_potential = current*r_best
+		value_to_ardustat = delta_potential / volts_per_tick;
+	
+		toArd("r",parseInt(set_best))
+		toArd("g",parseInt(value_to_ardustat))
 }
 
 function find_error(value)
