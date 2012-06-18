@@ -55,6 +55,8 @@ else queue_write_rate = process.argv[5]
 resistance=587.6
 coefficient=475
 error=0
+currrent_threshold = 0.01 //threshold in Amps to switch from low-current to high-current mode
+high_current = false
 
 //MongoDB stuff
 db_connected = false
@@ -490,8 +492,16 @@ function moveground(value)
 //Set Galvanostat
 function galvanostat(value)
 {
+	if (value >= current_threshold) {
+		high_current = true
+	}
+	else {
+		high_current = false
+	}
+	if (high_current) {
+		val=(value/coefficient)*resistance
+	}
 	foovalue = Math.abs(value)
-	val=(value/coefficient)*resistance
 	//First Match R
 	r_guess = .1/foovalue
 	//console.log(r_guess)
@@ -511,8 +521,12 @@ function galvanostat(value)
 	} 
 
 	//now solve for V
-	// delta_potential = value*r_best
-	delta_potential = val
+	if (high_current) {
+		delta_potential = val
+	}
+	else {
+		delta_potential = value*r_best
+	}
 	//console.log(r_best)
 	//console.log(set_best)
 	//console.log(delta_potential)
