@@ -391,7 +391,7 @@
 		if ($("#flot_current").length > 0)
 		{
 			flotfoo = []   
-			flotfoo.push({'data':flotformat(foo,'time','Current_pin'),'label':'Current','color':'red'});
+			flotfoo.push({'data':flotformat(foo,'time','current'),'label':'Current','color':'red'});
 			$.plot($("#flot_current"), flotfoo,options);
 		}
 	}
