@@ -127,12 +127,26 @@ void loop()
     holdString[4] = serInString[4];
 
     //try to print out collected information. it will do it only if there actually is some info.
-    if (serInString[0] == 43 || serInString[0] == 45 || serInString[0] == 114 || serInString[0] == 103 || serInString[0] == 112|| serInString[0] == 80 ||  serInString[0] == 82 || serInString[0] == 99 || serInString[0] == 100 || serInString[0] == 86)
+    if (serInString[0] == 43 ||  //+: Sets first DAC 
+        serInString[0] == 45 ||  //-: OCV
+        serInString[0] == 114 || //r: Set DVR
+        serInString[0] == 103 || //g: Set low current galvanostat
+        serInString[0] == 112 || //p: Set potentiostat
+        serInString[0] == 80 ||  //P: ???
+        serInString[0] == 82 ||  //R: Calibration
+        serInString[0] == 99 ||  //c: ???
+        serInString[0] == 100 || //d: Sets second (ground) DAC
+        serInString[0] == 86 ||  //V: Sets ID
+        serInString[0] == 72)    //H: set high current galvanostat
     {
       if (serInString[0] == 43) positive = true;
       else if (serInString[0] == 45) positive = false;
       pstat = false;
-      if (serInString[0] != 114) gstat = false;
+      if (serInString[0] != 114) 
+      {  
+        gstat = false;
+        gstat_H = false;
+      }
       dactest = false;
       rtest = false;
       ocv = false;
@@ -247,6 +261,11 @@ void loop()
       
       if (serInString[0] == 72)
       {
+        digitalWrite(5,HIGH);
+        digitalWrite(6,LOW);
+        delay(100);
+        digitalWrite(5,LOW);
+        digitalWrite(6,LOW);
         dacon();
         gstat_H = true;
 
@@ -356,6 +375,7 @@ void loop()
     ocv = true;
     gstat = false;
     pstat = false;
+    gstat_H = false;
     digitalWrite(3,LOW);
 
     //blink 3 times
@@ -606,6 +626,13 @@ void galvanostat()
 {
       adc = analogRead(0);
       dac = analogRead(1);
+      
+      digitalWrite(5,HIGH);
+      digitalWrite(6,LOW);
+      delay(100);
+      digitalWrite(5,LOW);
+      digitalWrite(6,LOW);
+      delay(100);
     
       int move = 1;
       int diff = 0;
@@ -661,7 +688,11 @@ void high_galvanostat()
       current_adc = betteranaread(4);
       adcgnd = betteranaread(2);
       
-    
+      digitalWrite(5,HIGH);
+      digitalWrite(6,LOW);
+      delay(100);
+      digitalWrite(5,LOW);
+      digitalWrite(6,LOW);
       int move = 1;
       float diff = 0;
     
@@ -725,6 +756,7 @@ void sendout()
 
   if (pstat) mode = 2;
   else if (gstat) mode = 3;
+  else if (gstat_H) mode = 5;
   else if (ocv) mode = 1;
   else if (dactest) mode = 4;
   else mode = 0;
