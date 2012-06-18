@@ -492,7 +492,7 @@ function moveground(value)
 //Set Galvanostat
 function galvanostat(current)
 {
-	if (value >= current_threshold) {
+	if (Math.abs(current) >= current_threshold) {
 		if(high_current == false) console.log("Switching to high current mode")
 		high_current = true
 		galvanostat_highcurrent(current)
