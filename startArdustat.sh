@@ -14,6 +14,12 @@ if [[ "$firstrun" == 'firstrun' ]]; then
 	echo "Finished installing node.js libraries"
 fi
 
+#Start mongodb daemon if it's not running
+daemonisrunning=`ps -aAc | grep mongod | wc -l | sed -e 's/^[ \t]*//'`
+if [[ $daemonisrunning == "0" ]]; then
+	mongod --quiet &
+fi
+
 unamestr=`uname`							#The architecture of the machine
 if [[ "$unamestr" == 'Linux' ]]; then
 	arduinos=`ls -d /dev/* | grep tty[UA][SC][BM]` 				#anything of the form /dev/ttyACM* or /dev/ttyUSB*
