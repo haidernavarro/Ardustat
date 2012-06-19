@@ -163,7 +163,6 @@ function setStuff(req,res)
 					console.log("Error getting log from database")
 					throw err
 				}
-				console.log(result)
 				console.log("Writing database to file...")
 				fs.writeFile(datafile, JSON.stringify(result), function(err) {
 					if(err) {
