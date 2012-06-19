@@ -72,7 +72,7 @@ try
 }
 catch (err)
 {
-	console.log(err)
+	console.log("MongoDB Error:",err)
 }
 
 //Express Redirects
@@ -291,14 +291,14 @@ function cycling_start_go(value)
 	arb_cycling_step = 0
 	arb_cycling = false
 	arb_cycling_step_start_time = new Date().getTime()	
-	console.log(value)
+	console.log("Recieved cycling string:", value)
 	for (var i = 0; i < value.length; i++)
 	{
 		cleaned_up = JSON.parse(value[i])
 		arb_cycling_settings.push(cleaned_up)
 	}
 
-	console.log(arb_cycling_settings)
+	console.log("Setting cycling settings:",arb_cycling_settings)
 	arb_cycling = true
 	cycling_mode()
 }
@@ -346,7 +346,7 @@ function cycling_mode()
 {
 	arb_cycling_step_start_time = new Date().getTime()
 	this_set = arb_cycling_settings[arb_cycling_step]
-	console.log(this_set)
+	console.log("Current cycling settings are:",this_set)
 	if (this_set['mode']=='potentiostat')
 	{
 		potentiostat(this_set['value'])
@@ -502,7 +502,7 @@ function galvanostat(current)
 		high_current = false
 		galvanostat_lowcurrent(current)
 	}
-	console.log("Set galvanostat to",value)
+	console.log("Set galvanostat to",current)
 }
 
 function galvanostat_highcurrent(current) {
@@ -510,6 +510,8 @@ function galvanostat_highcurrent(current) {
 	value_to_ardustat = delta_potential / volts_per_tick;
 	toArd("r",parseInt(0))
 	toArd("H",parseInt(value_to_ardustat))
+	toArd("H",parseInt(value_to_ardustat)) //Send command twice to make sure
+											//that the Ardustat gets it
 }
 
 function galvanostat_lowcurrent(current) {
@@ -531,6 +533,9 @@ function galvanostat_lowcurrent(current) {
 		delta_potential = current*r_best
 		value_to_ardustat = delta_potential / volts_per_tick;
 	
+		toArd("r",parseInt(set_best))
+		toArd("g",parseInt(value_to_ardustat))
+		//Send commands twice to make sure that the Ardustat gets them
 		toArd("r",parseInt(set_best))
 		toArd("g",parseInt(value_to_ardustat))
 }

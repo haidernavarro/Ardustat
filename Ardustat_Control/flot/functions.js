@@ -340,4 +340,3 @@ function plot_all(data) {
 		$.plot($("#flot_current"), flotfoo,options);
 	}
 }
-z
