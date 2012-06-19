@@ -145,7 +145,7 @@ function setStuff(req,res)
 		if (logger == "started")
 		{
 			console.log("Starting log")
-			profix = req.body.datafilename +"_"+ new Date().getTime().toString()
+			profix = req.body.datafilename + "_" + new Date().getTime().toString() + ".ardudata"
 			datafile = profix
 			if (db_connected) 
 			{
@@ -155,6 +155,23 @@ function setStuff(req,res)
 		else if (logger = "stopped")
 		{
 			console.log("Stopping log")
+			console.log("Getting log from database...")
+			//Write information from mongodb to actual file
+			atafile = datafile.replace(".ardudat","")
+			db.collection(atafile).find().toArray(function(err, result) {
+				if(err) {
+					console.log("Error getting log from database")
+					throw err
+				}
+				console.log(result)
+				console.log("Writing database to file...")
+				fs.writeFile(datafile, JSON.stringify(result), function(err) {
+					if(err) {
+						console.log("Error writing database to file")
+					}
+					console.log("Wrote database to",datafile)
+				});
+			});			
 		}
 	}
 	var holdup = false
@@ -290,15 +307,15 @@ function cycling_start_go(value)
 	arb_cycling_settings = []
 	arb_cycling_step = 0
 	arb_cycling = false
-	arb_cycling_step_start_time = new Date().getTime()	
-	console.log("Recieved cycling string:", value)
+	arb_cycling_step_start_time = new Date().getTime()
+	console.log("Received cycling string(s):\n", value)
 	for (var i = 0; i < value.length; i++)
 	{
 		cleaned_up = JSON.parse(value[i])
 		arb_cycling_settings.push(cleaned_up)
 	}
 
-	console.log("Setting cycling settings:",arb_cycling_settings)
+	console.log("Setting cycling settings:\n",arb_cycling_settings)
 	arb_cycling = true
 	cycling_mode()
 }
@@ -742,7 +759,7 @@ everyxlogcounter = 0
 biglogger = 0
 
 
-//GotData: Called from dataParser every time a new line of data is recieved
+//GotData: Called from dataParser every time a new line of data is received
 function gotData(data) {
 	if (data.search("GO")>-1)
 	{
@@ -783,7 +800,6 @@ function gotData(data) {
 					everyxlogcounter = 0
 				}
 			}
-			//exec("echo '"+JSON.stringify(foo)+"' >> data/"+datafile);
 		}
 		else
 		{
@@ -813,7 +829,7 @@ function dataParser(rawdata) {
 	}		
 }
 
-//called every time a new chunk of serial data is recieved
+//called every time a new chunk of serial data is received
 serialPort.on("data", dataParser);
 
 //ardupadder: cleans up commands before they're sent to the ardustat
