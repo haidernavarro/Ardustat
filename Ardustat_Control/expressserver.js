@@ -145,7 +145,7 @@ function setStuff(req,res)
 		if (logger == "started")
 		{
 			console.log("Starting log")
-			profix = req.body.datafilename + "_" + new Date().getTime().toString() + ".ardudata"
+			profix = req.body.datafilename + "_" + new Date().getTime().toString()
 			datafile = profix
 			if (db_connected) 
 			{
@@ -155,22 +155,6 @@ function setStuff(req,res)
 		else if (logger = "stopped")
 		{
 			console.log("Stopping log")
-			console.log("Getting log from database...")
-			//Write information from mongodb to actual file
-			atafile = datafile.replace(".ardudat","")
-			db.collection(atafile).find().toArray(function(err, result) {
-				if(err) {
-					console.log("Error getting log from database")
-					throw err
-				}
-				console.log("Writing database to file...")
-				fs.writeFile(datafile, JSON.stringify(result), function(err) {
-					if(err) {
-						console.log("Error writing database to file")
-					}
-					console.log("Wrote database to",datafile)
-				});
-			});			
 		}
 	}
 	var holdup = false
