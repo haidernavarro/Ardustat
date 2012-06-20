@@ -26,7 +26,7 @@ arduino] (http://arduino.cc/en/Guide/HomePage)).
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
 	
 ###Instructions for first run:
-1. Install Version of Firmware 10s on your ardustat (Firmware/firmware\_12s/)
+1. Install Version of Firmware 12s on your ardustat (Firmware/firmware\_12s/)
 2. On Mac OS X and Linux, execute
 	- bash startArdustat.sh
 <br> (On Windows, execute firstRun.bat, then go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
