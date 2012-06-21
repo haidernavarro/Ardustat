@@ -174,9 +174,15 @@ $("#startcv").click(function(){
 
 $("#startcycling").click(function(){
 	cv_arr = []
-	values = $("#cyclingtext").val().split("\n")
+	fields = []
 	
-	
+	values = []
+	$("input").each(function(index) {
+		if ($(this).attr('id') == "cyclingtext") {
+			values.push($(this).val())
+		}
+	});
+		
 	$.ajax({
 		type: 'POST',
 		dataType: "json",

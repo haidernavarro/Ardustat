@@ -10,6 +10,21 @@
 		</style>
 		<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+		<script>
+var index = 0;
+function addCycleCMD()
+{
+		var input = document.createElement("input");
+		input.type = "text";
+		input.name = "cyclecmd" + ++index;
+		input.id = "cyclingtext";
+		input.setAttribute("style","width:700;");
+		container = document.getElementById("cyclingcontainer")
+		container.appendChild(input); // put it into the DOM
+		var linebreak = document.createElement("br");
+		container.appendChild(linebreak);
+}
+		</script>
 		<script src="/socket.io/socket.io.js"></script>
 	</head>
 	<body>
