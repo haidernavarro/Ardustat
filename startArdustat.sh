@@ -1,6 +1,6 @@
 #!/bin/bash
 
-firstrun=`sed -n '1p' ./config`				#The first line of the file named 'config'
+firstrun=`sed -n '1p' ./config.rc`				#The first line of the file named 'config.rc'
 if [[ "$firstrun" == 'firstrun' ]]; then
 	echo "First run. Installing node.js libraries..."
 	cd ./Ardustat_Control
@@ -36,12 +36,12 @@ if [[ $arduinos == "" ]]; then
 fi
 cd Ardustat_Control
 if [[ $numofarduinos == "1" ]]; then
-	node expressserver.js $arduinos
+	node expressserver.js $arduinos $1 $2 $3
 	exit
 fi
 echo You appear to have multiple arduinos connected. Please select one:
 select fname in $arduinos;
 do
-	node expressserver.js $fname
+	node expressserver.js $fname $1 $2 $3
 	break;
 done
