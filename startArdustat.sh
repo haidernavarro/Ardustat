@@ -8,9 +8,9 @@ if [[ "$firstrun" == 'firstrun' ]]; then
 	cd ../Ardustat_Viewer
 	bash ./initializeNodeJS.sh
 	cd ..
-	rm ./config
-	touch ./config
-	echo notfirstrun > ./config
+	rm ./config.rc
+	touch ./config.rc
+	echo notfirstrun > ./config.rc
 	echo "Finished installing node.js libraries"
 fi
 
