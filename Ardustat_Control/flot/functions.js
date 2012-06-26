@@ -172,23 +172,71 @@ $("#startcv").click(function(){
 	});	
 });
 
+$('select.cycle_mode_choices').live("change", function() {
+	if ($(this).val() == "galvanostat") {
+		thisidnum = $(this).attr('id').substring(2)
+		$(".dependent_options").each(function() {
+			if($(this).attr('id').substring(2) == thisidnum) {
+				$(this).empty();
+				$(this).append('\
+				Current: <input type="text" id="cycle_value" class="setting_input"> \
+				Direction: <select id="cycle_direction"> \
+				  <option>charge</option> \
+				  <option>discharge</option> \
+				 </select> \
+				 Cutoff Time: <input type="text" id="cycle_cutoff_time" class="setting_input"> \
+				 Cutoff Potential: <input type="text" id="cycle_cutoff_potential" class="setting_input"><br>');
+			}
+		});
+	}
+	else if ($(this).val() == "potentiostat") {
+		thisidnum = $(this).attr('id').substring(2)
+		$(".dependent_options").each(function() {
+			if($(this).attr('id').substring(2) == thisidnum) {
+				$(this).empty();
+				$(this).append('\
+				Voltage: <input type="text" id="cycle_value" class="setting_input"> \
+				Cutoff Time: <input type="text" id="cycle_cutoff_time" class="setting_input"><br>');
+			}
+		});
+	}
+});
+
 $("#startcycling").click(function(){
-	cv_arr = []
-	fields = []
+	jsonstrings = []
 	
-	values = []
-	$("input").each(function(index) {
-		if ($(this).attr('id') == "cmd") {
-			values.push($(this).val())
+	$(".cycle_mode_choices").each(function(index) {
+		thejson = {}
+		if($(this).val() == "galvanostat") {
+			thejson["mode"] = "galvanostat"
+		}
+		else if($(this).val() == "potentiostat") {
+			thejson["mode"] = "potentiostat"
+		}
+		jsonstrings.push(thejson)
+	});
+	$(".dependent_options").each(function(index) {
+		jsonstrings[index]["value"] = $(this).children("#cycle_value").val()
+		if (jsonstrings[index]["mode"] == "galvanostat") {
+			jsonstrings[index]["direction"] = $(this).children("#cycle_direction").val()
+			jsonstrings[index]["cutoff_potential"] = $(this).children("#cycle_cutoff_potential").val()
+			jsonstrings[index]["cutoff_time"] = $(this).children("#cycle_cutoff_time").val()
+		}
+		else if (jsonstrings[index]["mode"] == "potentiostat") {
+			jsonstrings[index]["cutoff_time"] = $(this).children("#cycle_cutoff_time").val()
+			jsonstrings[index]["direction"] = "charge"
+			jsonstrings[index]["cutoff_potential"] = "0"
 		}
 	});
-		
+	for(i=0; i < jsonstrings.length; i++) {
+		jsonstrings[i] = JSON.stringify(jsonstrings[i])
+	}
 	$.ajax({
 		type: 'POST',
 		dataType: "json",
 		async: true,
 		url: '/senddata',
-		data: {command:"cycling",value:values},
+		data: {command:"cycling",value:jsonstrings},
 		success: function(stuff){
 			$("#status").html("all good").fadeIn().fadeOut()
 		}
@@ -196,9 +244,19 @@ $("#startcycling").click(function(){
 });
 
 $("#addrow").click(function() {
-	var newCmd = $('#cmd').clone()
-	$('#cmd').after(newCmd);
-	$('#cmd').after("<br>");
+	$(".dependent_options").each(function() {
+		thisidnum = parseInt($(this).attr('id').substring(2))
+	});
+    cycle_select = $("#c-"+thisidnum).clone()
+    if ($("#c-"+thisidnum).val() == "galvanostat") {
+		cycle_select.val('galvanostat')
+	}
+    cycle_options = $("#o-"+thisidnum).clone()
+	cycle_select.attr('id','c-'+(thisidnum+1));
+	cycle_options.attr('id','o-'+(thisidnum+1));
+	$("#o-"+thisidnum).after(cycle_select);
+	$("#o-"+thisidnum).after("Mode: ");
+	$("#c-"+(thisidnum+1)).after(cycle_options);
 });
 
 $("#cyclingsave").click(function(){ 
