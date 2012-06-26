@@ -178,7 +178,7 @@ $("#startcycling").click(function(){
 	
 	values = []
 	$("input").each(function(index) {
-		if ($(this).attr('id') == "cyclingtext") {
+		if ($(this).attr('id') == "cmd") {
 			values.push($(this).val())
 		}
 	});
@@ -195,6 +195,11 @@ $("#startcycling").click(function(){
 	});		
 });
 
+$("#addrow").click(function() {
+	var newCmd = $('#cmd').clone()
+	$('#cmd').after(newCmd);
+	$('#cmd').after("<br>");
+});
 
 $("#cyclingsave").click(function(){ 
 	values = {name:$("#cyclingname").val(),program:$("#cyclingtext").val()}

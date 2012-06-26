@@ -28,8 +28,10 @@ Measured Current<input type="textbox" id="input_current"> </input> \
 <button id="find_error">Find!</button><br>'
 
 divvers['cyclingcommanders'] = 'Setting Commands <br>\
-<div id="cyclingcontainer"> </div> \
-<button id="addrow" onclick="addCycleCMD();">Add Cycling Command</button> <br>\
+<div class="cyclecmds"> \
+<input type="text" id="cmd" style="width:700">\
+</div> \
+<button id="addrow">Add Cycling Command</button> <br>\
 <select id="cyclingpresets"> </select> <input id="cyclingname"></input><button id="cyclingsave">Save Cycling Parameters</button>\
 <button id="startcycling">Cycling Start</button></span><br><br>'
 
