@@ -8,12 +8,20 @@
 	<body>
 		<table>
 			<tr>
-				<td><div id="debuggraph" class="debuggraph"></div></td>
+				<td colspan="2"><div id="debuggraph" class="debuggraph"></div></td>
+			</tr>
+			<tr>
+				<td>
+					<div class="title">Calibration:</div>
+					<div id="calibrate" class="cmds"></div>
+					<div class="title">Set ID:</div>
+					<div id="idset" class="cmds"></div>
+					<div class="title">Send direct command:</div>
+					<div id="directcmd" class="cmds"></div>
+				</td>
 				<td><div id="debug_info"></div></td>
 			</tr>
 		</table>
-		<div class="title">Send direct command:</div>
-		<div id="directcmd" class="cmds"></div>
 		<script src="/flot/build_dom.js"></script>
 		<script src="/flot/functions.js"></script> 
 	</body>

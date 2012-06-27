@@ -98,6 +98,12 @@ app.get('/debug', function(req, res){
 });
 
 //CV Page
+app.get('/cycler', function(req, res){
+	indexer = fs.readFileSync('cycler.html').toString()
+    res.send(indexer);
+});
+
+//CV Page
 app.get('/cv', function(req, res){
 	indexer = fs.readFileSync('cv.html').toString()
     res.send(indexer);
