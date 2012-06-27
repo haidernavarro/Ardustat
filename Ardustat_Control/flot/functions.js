@@ -254,10 +254,8 @@ $('select.cycle_mode_choices').live("change", function() {
 	}
 });
 
-//Sends cycling data to arduino as a list of JSON strings
-$("#startcycling").click(function(){
+function getCyclingJSONs() {
 	jsonstrings = []
-	
 	$(".cycle_mode_choices").each(function(index) {
 		thejson = {}
 		thejson["mode"] = $(this).val();
@@ -279,6 +277,12 @@ $("#startcycling").click(function(){
 	for(i=0; i < jsonstrings.length; i++) { //convert JSON objects to JSON strings
 		jsonstrings[i] = JSON.stringify(jsonstrings[i])
 	}
+	return jsonstrings
+}
+	
+//Sends cycling data to arduino as a list of JSON strings
+$("#startcycling").click(function(){
+	jsonstrings = getCyclingJSONs();
 	$.ajax({
 		type: 'POST',
 		dataType: "json",
@@ -310,9 +314,11 @@ $("#addrow").click(function() {
 	$("#c-"+(thisidnum+1)).after(cycle_options);
 });
 
+//Saves cycling information
 $("#cyclingsave").click(function(){ 
-	values = {name:$("#cyclingname").val(),program:$("#cyclingtext").val()}
-
+	myprogram = getCyclingJSONs();
+	values = {name:$("#cyclingname").val(),program:myprogram}
+	console.log(values)
 	$.ajax({
 		type: 'POST',
 		dataType: "json",

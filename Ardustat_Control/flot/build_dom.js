@@ -6,8 +6,8 @@ divvers['commanders'] = '\
   <option>galvanostat</option> \
   <option>moveground</option> \
 \
-</select><input type="textbox" id="input"> </input> <span id="status"> </span><br> \
-<button id="send">send</button><button id="blink">blink</button><button id="ocv">ocv</button><br><br>'
+</select><input type="textbox" id="input"> </input> <span id="status"> </span> \
+<button id="send">send</button><br><button id="blink">blink</button><button id="ocv">ocv</button><br><br>'
 
 divvers['calibrate'] = '\
 Calibration resistor value:<br> \
@@ -47,12 +47,14 @@ Mode: <select id="c-1" class="cycle_mode_choices"> \
 </select> \
 <span id="o-1" class="dependent_options"> \
 Voltage: <input type="text" id="cycle_value" class="setting_input"> \
-Cutoff Time: <input type="text" id="cycle_cutoff_time" class="setting_input"> <br /> \
+Cutoff Time: <input type="text" id="cycle_cutoff_time" class="setting_input"> <br> \
 </span> \
 </div> \
-<button id="addrow">Add Cycling Command</button> <br>\
-<select id="cyclingpresets"> </select> <input id="cyclingname"></input><button id="cyclingsave">Save Cycling Parameters</button>\
-<button id="startcycling">Cycling Start</button></span><br><br>'
+<button id="addrow">Add Cycling Command</button> \
+<button id="startcycling">Start Cycling (Current Parameters)</button><br><br> \
+Name: <input id="cyclingname"></input><button id="cyclingsave">Save New Cycling Parameters</button><br>\
+<select id="cyclingpresets"></select> \
+<button id="startsavedcycling" disabled="disabled">Start Cycling (Saved Parameters)</button>'
 
 
 for (key in divvers)

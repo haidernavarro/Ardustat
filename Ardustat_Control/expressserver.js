@@ -216,6 +216,7 @@ function setStuff(req,res)
 	{
 		if (req.body.programs == "cyclingsave")
 		{
+			value = req.body.value;
 			holdup = true
 			console.log("Saving cycler");
 			holdup = true;
