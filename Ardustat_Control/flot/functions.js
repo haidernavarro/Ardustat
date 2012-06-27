@@ -32,8 +32,16 @@ var socket = io.connect('/');
 
 //Socket Stuff
 socket.on('new_data', function (data) {
-	out_text = ""
 	fata = data.ardudata
+	
+	debug_info = ""
+	for (var key in fata) { //generate values for debug
+		if (fata.hasOwnProperty(key)) {
+			debug_info += key + ": " + fata[key] + "<br>"
+		}
+	}
+	$("#debug_info").html(debug_info)
+	
 	if (fata['cv_settings'] != undefined) cvprocess(fata)
 	if (fata['arb_cycling_settings'] != undefined) cyclingprocess(fata)
 	
@@ -43,6 +51,7 @@ socket.on('new_data', function (data) {
 	
 	while (big_arr.length > 100) big_arr.shift(0)
 	plot_all(big_arr)
+	plot_all_debug(big_arr)
 });
 
 
@@ -95,6 +104,46 @@ $("#send").click(function() {
 	});	
 });
 
+$("#send_directcmd").click(function(){
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {directcmd:$("#directcmd_value").val()},
+		success: function(stuff){
+			console.log(stuff);
+		}
+	});
+});
+
+$("#send_calibrate").click(function(){
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {command:"calibrate",value:$("#calibrate_r_fixed").val()},
+		success: function(stuff){
+			console.log(stuff);
+		}
+	});
+			
+});
+
+$("#set_id").click(function() {
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {command:"idset",value:$("#idset_value").val()},
+		success: function(stuff) {
+			console.log(stuff);
+		}
+	});
+});
+
 $("#find_error").click(function() {
 	$.ajax({
 		type: 'POST',
@@ -114,7 +163,7 @@ $("#blink").click(function() {
 		dataType: "json",
 		async: true,
 		url: '/senddata',
-		data: {arducomm:" "},
+		data: {command:"blink",value:""},
 		success: function(stuff){
 			console.log(stuff);
 		}
@@ -410,4 +459,16 @@ function plot_all(data) {
 		flotfoo.push({'data':flotformat(foo,'time','current'),'label':'Current','color':'red'});
 		$.plot($("#flot_current"), flotfoo,options);
 	}
+}
+
+function plot_all_debug(data) {
+	foo = data;
+	flotfoo = []
+	flotfoo.push({'data':flotformat(foo,'time','cell_adc'),'label':'cell_adc'});
+	flotfoo.push({'data':flotformat(foo,'time','dac_adc'),'label':'dac_adc'});
+	flotfoo.push({'data':flotformat(foo,'time','dac_set'),'label':'dac_set'});
+	flotfoo.push({'data':flotformat(foo,'time','res_set'),'label':'res_set'});
+	flotfoo.push({'data':flotformat(foo,'time','gnd_adc'),'label':'gnd_adc'});
+	
+	$.plot($("#debuggraph"), flotfoo,options);
 }

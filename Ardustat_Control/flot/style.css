@@ -4,11 +4,12 @@
 		overflow-x:hidden;
 		
 	}
-	.output
+	.cmds
 	{
 		width:800px;
+		padding-left:100px;
 		margin: auto auto;
-		border: black 1px;
+		text-align:left;
 	}
 	
 	.title
@@ -33,4 +34,9 @@
 	.setting_input
 	{
 		width:60;
+	}
+	.debuggraph {
+		width:800px;
+		height:300px;
+		margin: auto auto;
 	}

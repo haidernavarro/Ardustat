@@ -127,8 +127,8 @@ console.log('Express server started on port ' + app.address().port.toString() +
 function setStuff(req,res)
 {
 	//loops to false
-	//If arducomm (e.g. direct signal to ardustat)
-	if (req.body.arducomm != undefined) serialPort.write(req.body.arducomm)
+	//If directcmd (e.g. direct signal to ardustat)
+	if (req.body.directcmd != undefined) serialPort.write(req.body.directcmd)
 	
 	if (req.body.logger != undefined)
 	{
@@ -201,7 +201,15 @@ function setStuff(req,res)
 		{
 			console.log("Setting cycler");
 			cycling_start_go(value)
-		}		
+		}
+		if (command == "idset") {
+			console.log("Setting ID");
+			set_id(value);
+		}
+		if (command == "blink") {
+			console.log("Blinking")
+			blink();
+		}
 	}
 	
 	if (req.body.programs != undefined)
@@ -538,6 +546,15 @@ function find_error(value)
 	error=value
 }
 
+function set_id(value) {
+	toArd("V",parseInt(value));
+	console.log("Set ID to",value)
+}
+
+function blink() {
+	serialPort.write(" ")
+}
+
 //Global Functions for Data Parsing
 id = 20035;
 vpt = undefined; //volts per tick
@@ -669,7 +686,7 @@ function calibrate_step()
 					dac_potential = this_foo['dac_potential']
 					cell_potential = this_foo['cell_potential']
 					gnd_potential = this_foo['gnd_potential']
-					res_value = rfixed*(((dac_potential-gnd_potential)/(cell_potential-gnd_potential)) - 1)		
+					res_value = rfixed*(((dac_potential-gnd_potential)/(cell_potential-gnd_potential)) - 1)					
 					if (res_value > 0) { //band-aid fix for bug where we were getting negative resistances
 						if (out_table[res_set] == undefined) out_table[res_set] = []
 						out_table[res_set].push(res_value)

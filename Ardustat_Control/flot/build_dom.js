@@ -9,6 +9,18 @@ divvers['commanders'] = '\
 </select><input type="textbox" id="input"> </input> <span id="status"> </span><br> \
 <button id="send">send</button><button id="blink">blink</button><button id="ocv">ocv</button><br><br>'
 
+divvers['calibrate'] = '\
+Calibration resistor value:<br> \
+<input type="textbox" id="calibrate_r_fixed" /><br> \
+<button id="send_calibrate">Calibrate</button>'
+
+divvers['idset'] = '\
+<input type="textbox" id="idset_value" /><br> \
+<button id="set_id">Set ID</button>'
+
+divvers['directcmd'] = '\
+<input type="textbox" id="directcmd_value" /> <br> \
+<button id="send_directcmd">send</button>'
 
 divvers['loggers'] = '\
 <div id="logentrybox">Log Name<input type="textbox" id="logfile"> </input><br> \
