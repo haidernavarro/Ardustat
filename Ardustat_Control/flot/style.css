@@ -6,7 +6,7 @@
 	}
 	.cmds
 	{
-		width:800px;
+		width:750px;
 		padding-left:100px;
 		margin: auto auto;
 		text-align:left;
@@ -39,4 +39,7 @@
 		width:800px;
 		height:300px;
 		margin: auto auto;
+	}
+	.links {
+		text-align: center;
 	}

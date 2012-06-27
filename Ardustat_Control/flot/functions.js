@@ -299,6 +299,7 @@ $("#startcycling").click(function(){
 //a dropdown <select> with id o-# and a <div> containing the rest of the
 //fields with id c-#, where # is an integer 'id number'
 $("#addrow").click(function() {
+	$("#remrow").removeAttr("disabled")
 	$(".dependent_options").each(function() {
 		thisidnum = parseInt($(this).attr('id').substring(2)) //ID number of last element
 	});
@@ -310,8 +311,25 @@ $("#addrow").click(function() {
 	cycle_select.attr('id','c-'+(thisidnum+1));
 	cycle_options.attr('id','o-'+(thisidnum+1));
 	$("#o-"+thisidnum).after(cycle_select);
-	$("#o-"+thisidnum).after("Mode: ");
 	$("#c-"+(thisidnum+1)).after(cycle_options);
+});
+
+$("#remrow").click(function() {
+	$(".dependent_options").each(function() {
+		thisidnum = parseInt($(this).attr('id').substring(2)) //ID number of last element
+	});
+	if(thisidnum == 1) {
+		$(this).attr("disabled","true")
+	}
+	else if (thisidnum == 2) {
+		$(this).attr("disabled","true")
+		$("#c-"+thisidnum).remove()
+		$("#o-"+thisidnum).remove()
+	}
+	else {
+		$("#c-"+thisidnum).remove()
+		$("#o-"+thisidnum).remove()
+	}
 });
 
 //Saves cycling information

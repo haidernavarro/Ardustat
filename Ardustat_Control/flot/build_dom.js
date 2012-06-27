@@ -41,7 +41,7 @@ Measured Current<input type="textbox" id="input_current"> </input> \
 
 divvers['cyclingcommanders'] = '\
 <div class="cyclecmds"> \
-Mode: <select id="c-1" class="cycle_mode_choices"> \
+<select id="c-1" class="cycle_mode_choices"> \
   <option>potentiostat</option> \
   <option>galvanostat</option> \
 </select> \
@@ -51,6 +51,7 @@ Cutoff Time: <input type="text" id="cycle_cutoff_time" class="setting_input"> <b
 </span> \
 </div> \
 <button id="addrow">Add Cycling Command</button> \
+<button id="remrow" disabled="true">Remove Cycling Command</button> \
 <button id="startcycling">Start Cycling (Current Parameters)</button><br><br> \
 Name: <input id="cyclingname"></input><button id="cyclingsave">Save New Cycling Parameters</button><br>\
 <select id="cyclingpresets"></select> \
