@@ -26,7 +26,7 @@ arduino] (http://arduino.cc/en/Guide/HomePage)).
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
 	
 ###Instructions for first run:
-1. Install Version of Firmware 12s on your ardustat (Firmware/firmware\_12s/)
+1. Install firmware version 12s on your ardustat with the Arduino program (Firmware/firmware\_12s/)
 2. On Mac OS X and Linux, execute
 	- bash startArdustat.sh
 <br> (On Windows, execute firstRun.bat, then go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
@@ -45,27 +45,5 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 From here on out, all you need to do is start startArdustat.sh and then go to http://localhost:8888
 <br> (on Windows, you'll still need to go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 
-
-##Now with basic cycling
-
-go to http://localhost:8888/cycler
-
-enter the following format to cycle
-
-{"mode":"galvanostat","value":0.004,"cutoff\_time":0,"direction":"charge","cutoff_potential":1.5}
-{"mode":"galvanostat","value":-0.002,"cutoff\_time":0,"direction":"discharge","cutoff_potential":0.6}
-
-a cutoff\_time of 0 means there is no cutoff time.  be careful!  
-
-logs log to mongo
-
-potential value = Volts
-current value = Amps
-time value = milliseconds
-
-Enjoy!
-
-##Now with basic viewing
-from Ardustat\_Viewer start node view_server.js 
-
-go to localhost:8000
+##Instructions for regular use:
+In your web browser, go to localhost:8888. On the default page, you can view the Ardustat's current and voltage over time, send cycling commands, manually control the galvanostat or potentiostat, start a MongoDB log and use the error finding functionality. In order to calibrate the Ardustat, you need to go to localhost:8888/debug, the debug page, where you can also see detailed information about what the Ardustat is doing. To use the CV functionality, go to localhost:8888/cv. To view the MongoDB logs, you need to execute 'node view_server.js' from the Ardustat_Viewer folder and then go to localhost:8000.

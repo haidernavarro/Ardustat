@@ -103,13 +103,6 @@ app.get('/cv', function(req, res){
     res.send(indexer);
 });
 
-//CV Page
-app.get('/cycler', function(req, res){
-	indexer = fs.readFileSync('cycler.html').toString()
-    res.send(indexer);
-});
-
-
 //Accept data (all pages, throws to setStuff()
 app.post('/senddata', setStuff,function(req, res,next){
 	//console.log(req.body)

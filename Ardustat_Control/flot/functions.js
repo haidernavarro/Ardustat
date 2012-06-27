@@ -172,6 +172,9 @@ $("#startcv").click(function(){
 	});	
 });
 
+//Called whenever the user changes a 'potentiostat/galvanostat'
+//dropdown. Changes the rest of the fields so that they match
+//what the user has chosen.
 $('select.cycle_mode_choices').live("change", function() {
 	if ($(this).val() == "galvanostat") {
 		thisidnum = $(this).attr('id').substring(2)
@@ -202,17 +205,13 @@ $('select.cycle_mode_choices').live("change", function() {
 	}
 });
 
+//Sends cycling data to arduino as a list of JSON strings
 $("#startcycling").click(function(){
 	jsonstrings = []
 	
 	$(".cycle_mode_choices").each(function(index) {
 		thejson = {}
-		if($(this).val() == "galvanostat") {
-			thejson["mode"] = "galvanostat"
-		}
-		else if($(this).val() == "potentiostat") {
-			thejson["mode"] = "potentiostat"
-		}
+		thejson["mode"] = $(this).val();
 		jsonstrings.push(thejson)
 	});
 	$(".dependent_options").each(function(index) {
@@ -228,7 +227,7 @@ $("#startcycling").click(function(){
 			jsonstrings[index]["cutoff_potential"] = "0"
 		}
 	});
-	for(i=0; i < jsonstrings.length; i++) {
+	for(i=0; i < jsonstrings.length; i++) { //convert JSON objects to JSON strings
 		jsonstrings[i] = JSON.stringify(jsonstrings[i])
 	}
 	$.ajax({
@@ -243,12 +242,15 @@ $("#startcycling").click(function(){
 	});		
 });
 
+//Adds a new cycle command. This consists of 2 separate html parts:
+//a dropdown <select> with id o-# and a <div> containing the rest of the
+//fields with id c-#, where # is an integer 'id number'
 $("#addrow").click(function() {
 	$(".dependent_options").each(function() {
-		thisidnum = parseInt($(this).attr('id').substring(2))
+		thisidnum = parseInt($(this).attr('id').substring(2)) //ID number of last element
 	});
-    cycle_select = $("#c-"+thisidnum).clone()
-    if ($("#c-"+thisidnum).val() == "galvanostat") {
+    cycle_select = $("#c-"+thisidnum).clone() //Clone last element
+    if ($("#c-"+thisidnum).val() == "galvanostat") { //Prevent bug where cloned dropdown would be wrong
 		cycle_select.val('galvanostat')
 	}
     cycle_options = $("#o-"+thisidnum).clone()
