@@ -97,7 +97,7 @@ app.get('/debug', function(req, res){
     res.send(indexer);
 });
 
-//CV Page
+//Cycler Page
 app.get('/cycler', function(req, res){
 	indexer = fs.readFileSync('cycler.html').toString()
     res.send(indexer);
@@ -282,7 +282,7 @@ logger = "stopped"
 datafile = ""
 everyxlog = 1
 
-//Global Variablew for Arb Cyclingq
+//Global Variables for Arb Cycling
 arb_cycling = false
 arb_cycling_settings = []
 arb_cycling_step = 0
@@ -329,13 +329,12 @@ function cycling_stepper()
 	{
 	 	next_step()
 	}
-
-	else if (direction == "charge" & last_potential > cutoff_potential)
+	else if (this_set["mode"] == "galvanostat" & direction == "charge" & last_potential > cutoff_potential)
 	{
 		next_step()
 	}
 	
-	else if (direction == "discharge" & last_potential < cutoff_potential)
+	else if (this_set["mode"] == "galvanostat" & direction == "discharge" & last_potential < cutoff_potential)
 	{
 		next_step()
 	}
