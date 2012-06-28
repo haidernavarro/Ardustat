@@ -9,6 +9,16 @@ var options = {
 	lines: { show: true}
 };
 
+var options_viewer = {
+	yaxis: { },
+	xaxis: { mode: "time" },
+	points: {
+		show: false ,
+		radius: .5},
+	lines: { show: true},
+	selection: { mode: "x" }
+};
+
 var options_cv = {
 	yaxis: { },
 	xaxis: { },
@@ -449,6 +459,41 @@ function grabData(dict) {
 	});
 }
 
+function grabData_viewer(dict) {
+	dict = JSON.stringify(dict)
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/getdata_viewer',
+		data: {'data':dict},
+		success: function(stuff){		
+			if ($("#central_info").length > 0 & stuff['collect'] == 'central_info') listCollections(stuff)
+			else if ($("#plots").length > 0 ) plot_all_viewer(stuff['data'])
+			else {
+				console.log("what the hell do I do with this")
+				console.log(stuff)
+			}
+		}
+	});
+}
+
+function plotlinker(filename)
+{
+	return '<a href="/plotter/'+filename.replace("%","%25")+'">'+filename+'</a>'
+}
+
+function listCollections(stuff) {
+	stuff = stuff['data']
+	out_text = "<table>"
+	for (j = 0; j < stuff.length;j++) {
+		out_text+="<tr><td>"+plotlinker(stuff[j]['filename'])+"</td><td>"+new Date(stuff[j]['time']).toLocaleString()+"</td></tr>"
+	}
+	out_text += "</table>"
+	$("#central_info").html(out_text)
+}
+
+
 function flotformat(source,xlab,ylab) {
 	start = source[0][xlab]
 	end = source[source.length - 1][xlab]
@@ -482,6 +527,21 @@ function plot_all(data) {
 		flotfoo = []   
 		flotfoo.push({'data':flotformat(foo,'time','current'),'label':'Current','color':'red'});
 		$.plot($("#flot_current"), flotfoo,options);
+	}
+}
+
+function plot_all_viewer(data) {
+	foo = data;
+	if ($("#flot_potential_viewer").length >0) {
+//			console.log($("#flot_potential").length )
+		flotfoo = []   
+		flotfoo.push({'data':flotformat(foo,'time','working_potential'),'label':'working_potential','color':'red'});
+		$.plot($("#flot_potential_viewer"), flotfoo,options_viewer);
+	}
+	if ($("#flot_current_viewer").length > 0) {
+		flotfoo = []   
+		flotfoo.push({'data':flotformat(foo,'time','current'),'label':'Current','color':'red'});
+		$.plot($("#flot_current_viewer"), flotfoo,options_viewer);
 	}
 }
 

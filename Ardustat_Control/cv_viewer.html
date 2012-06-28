@@ -4,7 +4,7 @@
 	
 	<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
 	<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
-	
+	<script src="/socket.io/socket.io.js"></script>	
 </head>
 <body>
 	<div class="plots">
@@ -21,7 +21,7 @@
 
 foo = window.location.pathname.split("/")
 db_to_get = foo[foo.length-1]
-grabData(db_to_get,{})
+grabData_viewer({collection:db_to_get,query:{}})
 
 </script>
 </html>
