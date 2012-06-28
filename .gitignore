@@ -1,10 +1,4 @@
-*.png
-*.dat
-*.pyc
-*.pickle
-*.json
-*.ardudata
-./Ardustat_Control/node_modules/
-./Ardustat_Viewer/node_modules/
-./config.rc
+*.csv
+./Software/node_modules/
+./Software/config.rc
 ./CSVFiles/
