@@ -7,14 +7,18 @@
 	</head>
 	<body>
 		<div class="plots">
-			<div class="title">Potential (V)</div>
+			<div class="graphtitle">Potential (V)</div>
 			<div id="flot_potential" class="plot"></div>
-			<div class="title">Current (A)</div>	
+			<div class="graphtitle">Current (A)</div>	
 			<div id="flot_current" class="plot"></div>
 		</div>
 		<div id="container">
-			<div class="title">Cycling:</div>
-			<div id="cyclingcommanders" class="cmds"></div>
+			<div class="links">
+				<a href="/cycler">Cycling</a>&nbsp;|&nbsp;
+				<a href="/debug">Calibration, Setting ID, Direct Commands</a>&nbsp;|&nbsp;
+				<a href="/cv">Cyclic Voltometry</a>&nbsp;|&nbsp;
+				<a href="/getlogs">View Logs</a>
+			</div>
 			<div class="title">Manual Control:</div>
 			<div id="commanders" class="cmds"> </div>
 			<div class="title">Logging:</div>
@@ -26,4 +30,3 @@
 		<script src="/flot/functions.js"></script> 
 	</body>
 </html>
-

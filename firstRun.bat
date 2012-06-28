@@ -1,3 +1,3 @@
-cd .\Ardustat_Control\
+cd .\Software\
 initializeNodeJS.bat
 cd ..

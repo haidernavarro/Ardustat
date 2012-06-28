@@ -11,13 +11,20 @@
 		margin: auto auto;
 		text-align:left;
 	}
-	
 	.title
 	{
 		padding:10px;
 		width:800px;
 		margin: auto auto;
 		text-align: left;
+		font-size: 1.25em;
+	}
+	.graphtitle
+	{
+		padding:10px;
+		width:800px;
+		margin: auto auto;
+		text-align: center;
 		font-size: 1.25em;
 	}
 	.plots

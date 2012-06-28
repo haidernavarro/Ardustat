@@ -29,7 +29,7 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 1. Install firmware version 12s on your ardustat with the Arduino program (Firmware/firmware\_12s/)
 2. On Mac OS X and Linux, execute
 	- bash startArdustat.sh
-<br> (On Windows, execute firstRun.bat, then go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
+<br> (On Windows, execute firstRun.bat, then go to the Software folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 3. In a browser, go to http://localhost:8888/
 	(stuff should be happening)
 4. We now need to calibrate the ardustat.  Put a quality resistor of known value between the working and counter clips, and then attach the reference clip to the counter clip
@@ -39,7 +39,7 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 8. Your ardustat is now calibrated.  You won't have to do this again (unless you delete the calibration file or feel that the values were inaccurate). You should now see the Potential and Current trace. Play with the the potentiostsat and galvanostat settings.
 
 From here on out, all you need to do is start startArdustat.sh and then go to http://localhost:8888
-<br> (on Windows, you'll still need to go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
+<br> (on Windows, you'll still need to go to the Software folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 
 ##Instructions for regular use:
 - For basic manual control, go to localhost:8888/.

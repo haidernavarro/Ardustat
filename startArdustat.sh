@@ -1,11 +1,10 @@
 #!/bin/bash
 
-firstrun=`sed -n '1p' ./config.rc`				#The first line of the file named 'config.rc'
+firstrun=`sed -n '1p' ./Software/config.rc`	#The first line of the file named 'config.rc'
 if [[ "$firstrun" == 'firstrun' ]]; then
 	echo "First run. Installing node.js libraries..."
-	cd ./Ardustat_Control
+	cd ./Software
 	bash ./initializeNodeJS.sh
-	cd ..
 	rm ./config.rc
 	touch ./config.rc
 	echo notfirstrun > ./config.rc
