@@ -329,14 +329,16 @@ function cycling_stepper()
 	{
 	 	next_step()
 	}
-	else if (this_set["mode"] == "galvanostat" & direction == "charge" & last_potential > cutoff_potential)
-	{
-		next_step()
-	}
-	
-	else if (this_set["mode"] == "galvanostat" & direction == "discharge" & last_potential < cutoff_potential)
-	{
-		next_step()
+	else if (cutoff_potential != "") {
+		console.log(cutoff_potential)
+		if (this_set["mode"] == "galvanostat" & direction == "charge" & last_potential > cutoff_potential)
+		{
+			next_step()
+		}
+		else if (this_set["mode"] == "galvanostat" & direction == "discharge" & last_potential < cutoff_potential)
+		{
+			next_step()
+		}
 	}
 	
 }
