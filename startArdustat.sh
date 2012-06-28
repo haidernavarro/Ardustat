@@ -5,8 +5,6 @@ if [[ "$firstrun" == 'firstrun' ]]; then
 	echo "First run. Installing node.js libraries..."
 	cd ./Ardustat_Control
 	bash ./initializeNodeJS.sh
-	cd ../Ardustat_Viewer
-	bash ./initializeNodeJS.sh
 	cd ..
 	rm ./config.rc
 	touch ./config.rc
