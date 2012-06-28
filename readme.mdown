@@ -42,8 +42,8 @@ From here on out, all you need to do is start startArdustat.sh and then go to ht
 <br> (on Windows, you'll still need to go to the Ardustat\_Control folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port))
 
 ##Instructions for regular use:
-For basic manual control, go to localhost:8888/.
-For cycling, go to localhost:8888/cycler.
-For cyclic voltometry, go to localhost:8888/cv.
-To recalibrate the Ardustat or give it a new ID, go to localhost:8888/debug.
-To view the MongoDB logs, go to localhost:8888/getlogs.
+- For basic manual control, go to localhost:8888/.
+- For cycling, go to localhost:8888/cycler.
+- For cyclic voltometry, go to localhost:8888/cv.
+- To recalibrate the Ardustat or give it a new ID, go to localhost:8888/debug.
+- To view the MongoDB logs, go to localhost:8888/getlogs.
