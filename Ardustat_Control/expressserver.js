@@ -693,10 +693,8 @@ function calibrate_step()
 					cell_potential = this_foo['cell_potential']
 					gnd_potential = this_foo['gnd_potential']
 					res_value = rfixed*(((dac_potential-gnd_potential)/(cell_potential-gnd_potential)) - 1)					
-					if (res_value > 0) { //band-aid fix for bug where we were getting negative resistances
-						if (out_table[res_set] == undefined) out_table[res_set] = []
-						out_table[res_set].push(res_value)
-					}
+					if (out_table[res_set] == undefined) out_table[res_set] = []
+					out_table[res_set].push(res_value)
 				}
 				//console.log(out_table)
 				final_table = {}
