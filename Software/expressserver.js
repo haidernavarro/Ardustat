@@ -241,6 +241,11 @@ function setStuff(req,res)
 			console.log("Setting cycler");
 			cycling_start_go(value)
 		}
+		if (command == "startsavedcycling")
+		{
+			console.log("Setting cycler to saved settings:", value)
+			startsavedcycling(value)
+		}
 		if (command == "idset") {
 			console.log("Setting ID");
 			set_id(value);
@@ -292,6 +297,18 @@ function cyclingsave(value,res)
 	})
 }
 
+function startsavedcycling(value)
+{
+	db.collection("cycling_presets").find().toArray(function(err, data)
+	{
+		for(var k=0;k<data.length;k++) {
+			if(data[k]["name"] == value) {
+				console.log(data[k])
+				cycling_start_go(data[k]["program"])
+			}
+		}
+	})
+}
 
 //Global Variables for CV
 cv = false

@@ -318,6 +318,20 @@ $("#startcycling").click(function(){
 	});		
 });
 
+$("#startsavedcycling").click(function() {
+	thissetting = $("#cyclingpresets").val()
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {command:"startsavedcycling",value:thissetting},
+		success: function(stuff) {
+			$("#status").html("all good").fadeIn().fadeOut()
+		}
+	});
+});
+
 //Adds a new cycle command. This consists of 2 separate html parts:
 //a dropdown <select> with id o-# and a <div> containing the rest of the
 //fields with id c-#, where # is an integer 'id number'

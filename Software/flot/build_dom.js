@@ -6,8 +6,8 @@ divvers['commanders'] = '\
   <option>galvanostat</option> \
   <option>moveground</option> \
 \
-</select><input type="textbox" id="input"> </input> <span id="status"> </span> \
-<button id="send">send</button><br><button id="blink">blink</button><button id="ocv">ocv</button><br><br>'
+</select><input type="textbox" id="input"></input><button id="send">send</button><span id="status"></span><br> \
+<button id="blink">blink</button><button id="ocv">ocv</button><br><br>'
 
 divvers['calibrate'] = '\
 Calibration resistor value:<br> \
@@ -55,7 +55,7 @@ Cutoff Time: <input type="text" id="cycle_cutoff_time" class="setting_input"> <b
 <button id="startcycling">Start Cycling (Current Parameters)</button><br><br> \
 Name: <input id="cyclingname"></input><button id="cyclingsave">Save New Cycling Parameters</button><br>\
 <select id="cyclingpresets"></select> \
-<button id="startsavedcycling" disabled="disabled">Start Cycling (Saved Parameters)</button>'
+<button id="startsavedcycling">Start Cycling (Saved Parameters)</button>'
 
 
 for (key in divvers)
