@@ -219,6 +219,7 @@ $("#exportCSV").click(function() {
 			data: {exportcsv:db_to_get},
 			success: function(stuff){
 				console.log(stuff);
+				$("#status").html("CSVfiles/"+db_to_get+".csv").fadeIn('slow')
 			}
 		});
 });
