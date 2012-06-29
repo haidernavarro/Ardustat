@@ -186,7 +186,7 @@ function setStuff(req,res)
 			exec("cd .. && mkdir CSVfiles", puts)
 		}
 		mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
-		console.log(mongoexportcmd)
+		//console.log(mongoexportcmd)
 		exec(mongoexportcmd, puts)
 	}
 	var holdup = false
@@ -303,7 +303,6 @@ function startsavedcycling(value)
 	{
 		for(var k=0;k<data.length;k++) {
 			if(data[k]["name"] == value) {
-				console.log(data[k])
 				cycling_start_go(data[k]["program"])
 			}
 		}
@@ -937,7 +936,7 @@ function getStuff_viewer(req,res)
 		if (q == '') q = null
 		db.collection(view_collection).find(q,f).limit(l).sort(s).count(function(err,count)
 		{
-			console.log(count)
+			//console.log(count)
 			max_docsish = 500
 			if (count > max_docsish)
 			{
@@ -951,7 +950,7 @@ function getStuff_viewer(req,res)
 			{
 				if(err) console.log(err)
 				else {
-				console.log(data.length)
+				//console.log(data.length)
 				res.send({collect:view_collection,data:data})	
 			}
 			})			
