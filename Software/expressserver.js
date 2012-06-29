@@ -182,12 +182,11 @@ function setStuff(req,res)
 	{	
 		collectiontoexport = req.body.exportcsv
 		console.log("Exporting database", collectiontoexport, "to CSV")
-		if (os.platform() == "darwin" || os.platform() == "linux") {
-			mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
+		if (os.platform().substring(0,3) == "win") {
+			exec("cd .. && mkdir CSVfiles", puts)
 		}
-		else if (os.platform().substring(0,3) == "win") {
-			mongoexportcmd = "mongoexport /csv /o ..\\CSVfiles\\" + collectiontoexport + ".csv /d ardustat /c " + collectiontoexport + " /f time,cell_potential,working_potential,current"
-		}
+		mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
+		console.log(mongoexportcmd)
 		exec(mongoexportcmd, puts)
 	}
 	var holdup = false
