@@ -1,9 +1,10 @@
 #!/bin/bash
 
-firstrun=`sed -n '1p' ./Software/config.rc`	#The first line of the file named 'config.rc'
+cd ./Software
+
+firstrun=`sed -n '1p' ./config.rc`	#The first line of the file named 'config.rc'
 if [[ "$firstrun" == 'firstrun' ]]; then
 	echo "First run. Installing node.js libraries..."
-	cd ./Software
 	bash ./initializeNodeJS.sh
 	rm ./config.rc
 	touch ./config.rc
@@ -31,7 +32,6 @@ if [[ $arduinos == "" ]]; then
 	echo No arduinos found
 	exit
 fi
-cd Ardustat_Control
 if [[ $numofarduinos == "1" ]]; then
 	node expressserver.js $arduinos $1 $2 $3
 	exit

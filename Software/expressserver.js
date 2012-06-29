@@ -8,6 +8,9 @@ var http = require("http"); //HTTP Server
 var url = require("url"); // URL Handling
 var fs = require('fs'); // Filesystem Access (writing files)
 var os = require("os"); //OS lib, used here for detecting which operating system we're using
+var util = require("util");
+var exec = require("child_process").exec;
+function puts(error, stdout, stderr) { util.puts(stdout) } //For executing command line arguments
 var express = require('express'), //App Framework (similar to web.py abstraction)
     app = express.createServer();
 	app.use(express.bodyParser());
@@ -174,6 +177,18 @@ function setStuff(req,res)
 		{
 			console.log("Stopping log")
 		}
+	}
+	if (req.body.exportcsv != undefined)
+	{	
+		collectiontoexport = req.body.exportcsv
+		console.log("Exporting database", collectiontoexport, "to CSV")
+		if (os.platform() == "darwin" || os.platform() == "linux") {
+			mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
+		}
+		else if (os.platform().substring(0,3) == "win") {
+			mongoexportcmd = "mongoexport /csv /o ..\\CSVfiles\\" + collectiontoexport + ".csv /d ardustat /c " + collectiontoexport + " /f time,cell_potential,working_potential,current"
+		}
+		exec(mongoexportcmd, puts)
 	}
 	var holdup = false
 	//If abstracted command (potentiostat,cv, etc)
@@ -873,13 +888,12 @@ function ardupadder(command,number)
 
 function getStuff_viewer(req,res)
 {
-	console.log(req.body.data)
+	//console.log(req.body.data)
 	foo = JSON.parse(req.body.data)
-	console.log(foo)
-	collection = foo.collection
-	console.log("Collection is:",collection)
+	//console.log(foo)
+	view_collection = foo.collection
 	
-	if (collection == "central_info")
+	if (view_collection == "central_info")
 	{
 	q = foo.query
 	l = undefined
@@ -889,14 +903,14 @@ function getStuff_viewer(req,res)
 	if (foo.sort != undefined) s = foo.sort
 	if (foo.fields != undefined) f = foo.fields
 	if (q == '') q = null
-	db.collection(collection).find(q,f).limit(l).sort(s).toArray(function(err,data)
+	db.collection(view_collection).find(q,f).limit(l).sort(s).toArray(function(err,data)
 	{
-		res.send({collect:collection,data:data})	
+		res.send({collect:view_collection,data:data})	
 	})
 	}
 	else
 	{
-		
+		console.log("Plotting collection:",view_collection)
 		q = foo.query
 		l = undefined
 		s = {}	
@@ -905,7 +919,7 @@ function getStuff_viewer(req,res)
 		if (foo.sort != undefined) s = foo.sort
 		if (foo.fields != undefined) f = foo.fields
 		if (q == '') q = null
-		db.collection(collection).find(q,f).limit(l).sort(s).count(function(err,count)
+		db.collection(view_collection).find(q,f).limit(l).sort(s).count(function(err,count)
 		{
 			console.log(count)
 			max_docsish = 500
@@ -917,12 +931,12 @@ function getStuff_viewer(req,res)
 				
 			}
 			
-			db.collection(collection).find(q,f).limit(l).sort(s).toArray(function(err,data)
+			db.collection(view_collection).find(q,f).limit(l).sort(s).toArray(function(err,data)
 			{
 				if(err) console.log(err)
 				else {
 				console.log(data.length)
-				res.send({collect:collection,data:data})	
+				res.send({collect:view_collection,data:data})	
 			}
 			})			
 		})

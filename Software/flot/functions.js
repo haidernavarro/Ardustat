@@ -210,6 +210,19 @@ $("#logger").click(function(){
 		});
 });
 
+$("#exportCSV").click(function() {
+		$.ajax({
+			type: 'POST',
+			dataType: "json",
+			async: true,
+			url: '/senddata',
+			data: {exportcsv:db_to_get},
+			success: function(stuff){
+				console.log(stuff);
+			}
+		});
+});
+
 $("#startcv").click(function(){
 	cv_arr = []
 	values = {}
