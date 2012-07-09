@@ -713,6 +713,9 @@ rfixed = 10000
 
 function calibrator(value)
 {
+	fs.unlinkSync("unit_"+id.toString()+".json")
+	console.log("Deleted old calibration table")
+	res_table = "null"
 	rfixed = parseFloat(value)
 	//console.log(rfixed)
 	calibrate = false
