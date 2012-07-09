@@ -58,7 +58,7 @@ else queue_write_rate = process.argv[5]
 resistance=587.6
 coefficient=475
 error=0
-current_threshold = 0.01 //threshold in Amps to switch from low-current to high-current mode
+current_threshold = 0.007 //threshold in Amps to switch from low-current to high-current mode
 high_current = false
 
 //MongoDB stuff
@@ -718,7 +718,6 @@ function calibrator(value)
 	calibrate = false
 	counter = 0
 	calloop = 0
-	moveground(0)
 	queuer.push("R0255")
 	setTimeout(function(){calibrate = true},100)
 }
