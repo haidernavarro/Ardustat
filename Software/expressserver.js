@@ -719,6 +719,7 @@ function calibrator(value)
 	counter = 0
 	calloop = 0
 	queuer.push("R0255")
+	moveground(0)
 	setTimeout(function(){calibrate = true},100)
 }
 
