@@ -1,8 +1,15 @@
 #!/bin/bash
 
+
 cd ./Software
 
 firstrun=`sed -n '1p' ./config.rc`	#The first line of the file named 'config.rc'
+unamestr=`uname`							#The architecture of the machine
+
+if [[ "$unamestr" == 'Darwin' ]]; then
+	PATH=$PATH:/usr/local/bin/ #Fix Platypus-related bug with not recognizing node files
+fi
+
 if [[ "$firstrun" == 'firstrun' ]]; then
 	echo "First run. Installing node.js libraries..."
 	bash ./initializeNodeJS.sh
@@ -18,7 +25,6 @@ if [[ $daemonisrunning == "0" ]]; then
 	mongod --quiet &
 fi
 
-unamestr=`uname`							#The architecture of the machine
 if [[ "$unamestr" == 'Linux' ]]; then
 	arduinos=`ls -d /dev/* | grep tty[UA][SC][BM]` 				#anything of the form /dev/ttyACM* or /dev/ttyUSB*
 	numofarduinos=`ls -d /dev/* | grep tty[UA][SC][BM] | wc -l` #number of results returned

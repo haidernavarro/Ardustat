@@ -143,9 +143,17 @@ app.post('/getdata_viewer', getStuff_viewer, function(req, res) {
 });
 
 //Start web server
-app.listen(tcpport);
-console.log('Express server started on port ' + app.address().port.toString() + 
-			'\nGo to http://localhost:'+app.address().port.toString() + '/ with your web browser.');
+try {
+	app.listen(tcpport);
+	console.log('Express server started on port ' + app.address().port.toString() + 
+				'\nGo to http://localhost:'+app.address().port.toString() + '/ with your web browser.');
+}
+catch(err) {
+	console.log("Could not start express server!")
+	console.log("This is probably due to an existing node.js process that hasn't exited.")
+	console.log("Try running 'killall node'.")
+	process.exit()
+}
 
 //*****************
 //Program Functions
