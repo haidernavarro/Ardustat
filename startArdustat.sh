@@ -23,9 +23,14 @@ if [[ "$firstrun" == 'firstrun' ]]; then
 			echo "Node.JS is not yet installed. Installing Node.JS..."
 			brew install node
 		fi
-		mongodbinstalled=`type -P mongo | wc -l | sed -e 's/^[ \t]*//'`
+		mongodbisinstalled=`type -P mongo | wc -l | sed -e 's/^[ \t]*//'`
 		if [[ "$mongodbisinstalled" == '0' ]]; then
 			echo "MongoDB is not yet installed. Installing MongoDB..."
+			brew install mongodb
+		fi
+		avrdudeisinstalled=`type -P avrdude | wc -l | sed -e 's/^[ \t]*//'`
+		if [[ "$avrdudeisinstalled" == '0' ]]; then
+			echo "AVRDUDE is not yet installed. Installing MongoDB..."
 			brew install mongodb
 		fi
 		echo "All dependencies are installed."
@@ -48,7 +53,6 @@ fi
 if [[ "$unamestr" == 'Linux' ]]; then
 	arduinos=`ls -d /dev/* | grep tty[UA][SC][BM]` 				#anything of the form /dev/ttyACM* or /dev/ttyUSB*
 	numofarduinos=`ls -d /dev/* | grep tty[UA][SC][BM] | wc -l` #number of results returned
-
 fi
 if [[ "$unamestr" == 'Darwin' ]]; then
 	arduinos=`ls -d /dev/* | grep tty.usbmodem*`
@@ -59,12 +63,26 @@ if [[ $arduinos == "" ]]; then
 	exit
 fi
 if [[ $numofarduinos == "1" ]]; then
+	needsfirmware=`node detectIfFirmwareLoaded.js $arduinos`
+	if [[ $needsfirmware == "nofirmware" ]]; then
+		echo "Arduino does not appear to be loaded with firmware. Loading firmware with AVRDUDE..."
+		cd ../Firmware/avrdude
+		bash uploadFirmware.sh $arduinos
+		cd ../../Software
+	fi
 	node expressserver.js $arduinos $1 $2 $3
 	exit
 fi
 echo You appear to have multiple arduinos connected. Please select one:
 select fname in $arduinos;
 do
+	needsfirmware=`node detectIfFirmwareLoaded.js $fname`
+	if [[ $needsfirmware == "nofirmware" ]]; then
+		echo "Arduino does not appear to be loaded with firmware. Loading firmware with AVRDUDE..."
+		cd ../Firmware/avrdude
+		bash uploadFirmware.sh $fname
+		cd ../../Software
+	fi
 	node expressserver.js $fname $1 $2 $3
 	break;
 done

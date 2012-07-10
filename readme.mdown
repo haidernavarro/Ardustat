@@ -14,30 +14,29 @@ Balasubramanian is supported by NSF CMMI 1031208
 
 ###Installation:
 ####Software that you need to have installed to use the ardustat:
-- [Arduino] (http://arduino.cc/en/Main/Software)
 - FTDI Drivers / Arduino Uno Drivers, depending on which version of arduino you are using (see [Getting Started guide for 
 arduino] (http://arduino.cc/en/Guide/HomePage)).
 - [Python 2] (http://www.python.org/download/releases/2.7.2/)
 - [Node.JS] (http://nodejs.org)
 - [MongoDB] (http://www.mongodb.org/downloads) (See Quickstart guide for installation [here] (http://www.mongodb.org/display/DOCS/Quickstart))
 - If you use Mac OS X, all of this software except for Arduino and the drivers will be installed automatically by the app.
-- If you use Windows, you'll also need to install [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express) so that Node.JS can compile the libraries correctly.
+- If you use Windows, you'll also need to install [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express) so that Node.JS can compile the libraries correctly, and [Arduino] (http://arduino.cc/en/Main/Software) so that you can install the firmware.
+
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
 	
 ###Instructions for first run:
-1. Install firmware version 12s on your ardustat with the Arduino program (Firmware/firmware\_12s/)
-2. Depending on your operating system:
+1. Depending on your operating system:
 <br> Mac OS X: Double click on the "Ardustat" application
 <br> Linux: Execute the bash script startArdustat.sh
-<br> Windows: go to the Software folder, run initializeNodeJS.bat, then execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port)
-3. In a browser, go to http://localhost:8888/debug
+<br> Windows: Install the firmware manually using the Arduino software, go to the Software folder, run initializeNodeJS.bat, then execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port)
+2. In a browser, go to http://localhost:8888/debug
 	(stuff should be happening)
+3. Give your ardustat an id: in the "Set ID" box type an ID number between 0 and 240, and hit send (you only have to do this once as well, the id will persist in EEPROM)
 4. We now need to calibrate the ardustat.  Put a quality resistor of known value between the working and counter clips, and then attach the reference clip to the counter clip
-5. Give your ardustat an id: in the "Set ID" box type an ID number between 0 and 240, and hit send (you only have to do this once as well, the id will persist in EEPROM)
-6. Under calibration resistor value, enter the value of your resistor in ohms, and hit send. You should see the graph changing, the yellow line should slope downwards and then reset 3 times. 
-7. Your ardustat is now calibrated.  You won't have to do this again (unless you delete the calibration file or feel that the values were inaccurate). 
-8. Go to http://localhost:8888/. You should now see the Potential and Current trace. Play with the the potentiostat and galvanostat settings.
+5. Under calibration resistor value, enter the value of your resistor in ohms, and hit send. You should see the graph changing, the yellow line should slope downwards and then reset 3 times. 
+6. Your ardustat is now calibrated.  You won't have to do this again (unless you delete the calibration file or feel that the values were inaccurate). 
+7. Go to http://localhost:8888/. You should now see the Potential and Current trace. Play with the the potentiostat and galvanostat settings.
 
 From here on out, all you need to do is:
 <br> Mac OS X: Double click on the "Ardustat" application
