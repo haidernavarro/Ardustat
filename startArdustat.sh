@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ./Software
+
 firstrun=`sed -n '1p' ./config.rc`	#The first line of the file named 'config.rc'
 unamestr=`uname`							#The architecture of the machine
 
