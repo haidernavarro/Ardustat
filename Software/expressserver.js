@@ -761,6 +761,7 @@ function calibrate_step()
 					if (res_value > 0) { //band-aid fix for bug where we were getting negative resistances
 						if (out_table[res_set] == undefined) out_table[res_set] = []
 						out_table[res_set].push(res_value)
+						console.log("Pot step:",res_set,"Resistance value:",res_value)
 					}
 				}
 				//console.log(out_table)
