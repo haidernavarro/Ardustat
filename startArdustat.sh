@@ -30,8 +30,8 @@ if [[ "$firstrun" == 'firstrun' ]]; then
 		fi
 		avrdudeisinstalled=`type -P avrdude | wc -l | sed -e 's/^[ \t]*//'`
 		if [[ "$avrdudeisinstalled" == '0' ]]; then
-			echo "AVRDUDE is not yet installed. Installing MongoDB..."
-			brew install mongodb
+			echo "AVRDUDE is not yet installed. Installing AVRDUDE..."
+			brew install avrdude
 		fi
 		echo "All dependencies are installed."
 	fi
