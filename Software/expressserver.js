@@ -763,6 +763,9 @@ function calibrate_step()
 						out_table[res_set].push(res_value)
 						console.log("Pot step:",res_set,"Resistance value:",res_value)
 					}
+					else {
+						console.log("Got negative resistance:",res_value,"for pot step",res_set)
+					}
 				}
 				//console.log(out_table)
 				final_table = {}
