@@ -20,7 +20,7 @@ arduino] (http://arduino.cc/en/Guide/HomePage)).
 - [Python 2] (http://www.python.org/download/releases/2.7.2/)
 - [Node.JS] (http://nodejs.org)
 - [MongoDB] (http://www.mongodb.org/downloads) (See Quickstart guide for installation [here] (http://www.mongodb.org/display/DOCS/Quickstart))
-- Note: If you are installing MongoDB on Mac OS X, it might be helpful to install it using the [homebrew] (http://mxcl.github.com/homebrew/) package manager.
+- If you use Mac OS X, all of this software except for Arduino and the drivers will be installed automatically by the app.
 - If you use Windows, you'll also need to install [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express) so that Node.JS can compile the libraries correctly.
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
