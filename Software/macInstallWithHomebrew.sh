@@ -12,6 +12,9 @@ mongodbisinstalled=`type -P mongo | wc -l | sed -e 's/^[ \t]*//'`
 if [[ "$mongodbisinstalled" == '0' ]]; then
 	echo "MongoDB is not yet installed. Installing MongoDB..."
 	brew install mongodb
+	sudo mkdir /data/
+	sudo mkdir /data/db
+	sudo chmod 777 /data/db
 fi
 avrdudeisinstalled=`type -P avrdude | wc -l | sed -e 's/^[ \t]*//'`
 if [[ "$avrdudeisinstalled" == '0' ]]; then
