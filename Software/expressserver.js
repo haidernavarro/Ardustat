@@ -112,11 +112,6 @@ app.get('/cv_viewer/*', function(req, res){
     res.send(indexer);
 });
 
-app.get('/firmware', function(req, res){
-	indexer = fs.readFileSync('firmware.html').toString()
-    res.send(indexer);
-});
-
 //Accept data (all pages, throws to setStuff()
 app.post('/senddata', setStuff,function(req, res,next){
 	//console.log(req.body)
