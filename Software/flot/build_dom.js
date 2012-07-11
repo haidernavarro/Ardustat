@@ -20,7 +20,7 @@ divvers['idset'] = '\
 
 divvers['directcmd'] = '\
 <input type="textbox" id="directcmd_value" /> <br> \
-<button id="send_directcmd">send</button>'
+<button id="send_directcmd" disabled="disabled">send</button>'
 
 divvers['loggers'] = '\
 <div id="logentrybox">Log Name<input type="textbox" id="logfile"> </input><br> \

@@ -509,12 +509,14 @@ void flushSerialString(char *strArray) {
 //Read String In
 void readSerialString (char *strArray) {
   int i = 0;
-  if(Serial.available()) {
-    Serial.println("    ");  //optional: for confirmation
-    while (Serial.available()){
-      strArray[i] = Serial.read();
-      i++;
-
+  while (i < 5) {
+    if(Serial.available()) {
+      Serial.println("    ");  //optional: for confirmation
+      while (Serial.available()){
+        strArray[i] = Serial.read();
+        i++;
+  
+      }
     }
   }
 }

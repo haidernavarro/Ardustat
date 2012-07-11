@@ -114,6 +114,16 @@ $("#send").click(function() {
 	});	
 });
 
+$("#directcmd_value").live('input', function () {
+	if($(this).val().length == 5) {
+		$("#send_directcmd").removeAttr("disabled")
+	}
+	else {
+		$("#send_directcmd").attr("disabled","true")
+	}
+});
+		
+
 $("#send_directcmd").click(function(){
 	$.ajax({
 		type: 'POST',
