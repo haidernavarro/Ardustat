@@ -13,11 +13,6 @@ if [[ "$firstrun" == 'firstrun' ]]; then
 	echo "First run."
 	if [[ "$unamestr" == 'Darwin' ]]; then
 		echo "Mac OS X detected."
-		homebrewisinstalled=`type -P brew | wc -l | sed -e 's/^[ \t]*//'`
-		if [[ "$homebrewisinstalled" == '0' ]]; then
-			echo "Homebrew is not yet installed."
-			exit 1;
-		fi
 		nodejsisinstalled=`type -P node | wc -l | sed -e 's/^[ \t]*//'`
 		if [[ "$nodejsisinstalled" == '0' ]]; then
 			echo "Node.JS is not yet installed."
@@ -34,7 +29,6 @@ if [[ "$firstrun" == 'firstrun' ]]; then
 			exit 1;
 		fi
 		echo "All dependencies are installed."
-
 	fi
 	
 	echo "Installing node.js libraries..."
