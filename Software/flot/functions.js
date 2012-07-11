@@ -245,6 +245,19 @@ $("#startcv").click(function(){
 	});	
 });
 
+$("#upload_firmware").click(function() {
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {command:"firmware",value:""},
+		success: function(stuff){
+			$("#status").html("Firmware uploaded").fadeIn().fadeOut()
+		}
+	});		
+});
+
 //Called whenever the user changes a 'potentiostat/galvanostat'
 //dropdown. Changes the rest of the fields so that they match
 //what the user has chosen.

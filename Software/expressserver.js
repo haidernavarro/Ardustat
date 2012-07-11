@@ -9,8 +9,14 @@ var url = require("url"); // URL Handling
 var fs = require('fs'); // Filesystem Access (writing files)
 var os = require("os"); //OS lib, used here for detecting which operating system we're using
 var util = require("util");
-var exec = require("child_process").exec;
-function puts(error, stdout, stderr) { util.puts(stdout) } //For executing command line arguments
+
+//Library for executing shell commands from node
+var FFI = require("ffi")
+var libc = new FFI.Library(null, {
+	"system": ["int32", ["string"]]
+});
+var run = libc.system
+
 var express = require('express'), //App Framework (similar to web.py abstraction)
     app = express.createServer();
 	app.use(express.bodyParser());
@@ -24,28 +30,7 @@ if (process.argv.length == 2) {
 	process.exit(0)
 }
 else {
-	if (os.platform() == "darwin" || os.platform() == "linux") {
-		//Operating system is linux or OS X
-		var serialport = require("serialport")
-		var SerialPort = require("serialport").SerialPort
-		var serialPort = new SerialPort(process.argv[2],{baudrate:57600,parser:serialport.parsers.raw});
-	}
-	else if (os.platform().substring(0,3) == "win") {
-		//Operating system is Windows
-		var SerialPort = require("serialport2").SerialPort
-		var serialPort = new SerialPort();
-		serialPort.open(process.argv[2], {
-			baudRate: 57600,
-			dataBits: 8,
-			parity: 'none',
-			stopBits: 1,
-			flowControl: false
-		});
-	}
-	else {
-		console.log("Your operating system isn't supported.")
-		process.exit(0)
-	}
+	serialPort = connectToSerial();
 }
 
 if (process.argv.length <= 3) tcpport = 8888
@@ -127,6 +112,11 @@ app.get('/cv_viewer/*', function(req, res){
     res.send(indexer);
 });
 
+app.get('/firmware', function(req, res){
+	indexer = fs.readFileSync('firmware.html').toString()
+    res.send(indexer);
+});
+
 //Accept data (all pages, throws to setStuff()
 app.post('/senddata', setStuff,function(req, res,next){
 	//console.log(req.body)
@@ -191,11 +181,11 @@ function setStuff(req,res)
 		collectiontoexport = req.body.exportcsv
 		console.log("Exporting database", collectiontoexport, "to CSV")
 		if (os.platform().substring(0,3) == "win") {
-			exec("cd .. && mkdir CSVfiles", puts)
+			run("cd .. && mkdir CSVfiles")
 		}
 		mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
 		//console.log(mongoexportcmd)
-		exec(mongoexportcmd, puts)
+		run(mongoexportcmd)
 	}
 	var holdup = false
 	//If abstracted command (potentiostat,cv, etc)
@@ -261,6 +251,10 @@ function setStuff(req,res)
 		if (command == "blink") {
 			console.log("Blinking")
 			blink();
+		}
+		if (command == "firmware") {
+			console.log("Uploading firmware")
+			firmware();
 		}
 	}
 	
@@ -617,6 +611,13 @@ function blink() {
 	serialPort.write(" ")
 }
 
+function firmware() {
+	serialPort = "null"
+	run("cd ../Firmware/avrdude && ./uploadFirmware.sh " + process.argv[2])
+	run("cd ../../Software")
+	serialPort = connectToSerial()
+}
+
 //Global Functions for Data Parsing
 id = 20035;
 vpt = undefined; //volts per tick
@@ -796,6 +797,33 @@ function calibrate_step()
 //Serial Port Interactions
 //************************
 
+function connectToSerial() {
+	if (os.platform() == "darwin" || os.platform() == "linux") {
+		//Operating system is linux or OS X
+		var serialport = require("serialport")
+		var SerialPort = require("serialport").SerialPort
+		var serialPort = new SerialPort(process.argv[2],{baudrate:57600,parser:serialport.parsers.raw});
+	}
+	else if (os.platform().substring(0,3) == "win") {
+		//Operating system is Windows
+		var SerialPort = require("serialport2").SerialPort
+		var serialPort = new SerialPort();
+		serialPort.open(process.argv[2], {
+			baudRate: 57600,
+			dataBits: 8,
+			parity: 'none',
+			stopBits: 1,
+			flowControl: false
+		});
+	}
+	else {
+		console.log("Your operating system isn't supported.")
+		process.exit(0)
+	}
+	serialPort.on("data", dataParser);
+	return serialPort
+}
+
 dataGetter = setInterval(function(){
 	queuer.push("s0000");
 	if (calibrate) calibrate_step()
@@ -831,6 +859,7 @@ biglogger = 0
 
 //GotData: Called from dataParser every time a new line of data is received
 function gotData(data) {
+	//console.log(data)
 	if (data.search("GO")>-1)
 	{
 		foo = data_parse(data);
@@ -898,9 +927,6 @@ function dataParser(rawdata) {
 		line = line + data;
 	}		
 }
-
-//called every time a new chunk of serial data is received
-serialPort.on("data", dataParser);
 
 //ardupadder: cleans up commands before they're sent to the ardustat
 //e.g. g10 -> g0010

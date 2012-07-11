@@ -57,6 +57,10 @@ Name: <input id="cyclingname"></input><button id="cyclingsave">Save New Cycling 
 <select id="cyclingpresets"></select> \
 <button id="startsavedcycling">Start Cycling (Saved Parameters)</button>'
 
+divvers['firmware'] = '\
+<button id="upload_firmware">Upload Firmware</button> \
+<span id="status"></span>'
+
 
 for (key in divvers)
 {
