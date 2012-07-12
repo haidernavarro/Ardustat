@@ -603,7 +603,7 @@ function set_id(value) {
 }
 
 function blink() {
-	serialPort.write(" ")
+	toArd(" ",0000)
 }
 
 function firmware() {
