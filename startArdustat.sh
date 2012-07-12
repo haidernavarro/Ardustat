@@ -29,7 +29,7 @@ echo "All dependencies are installed."
 #Install node.js libraries if they haven't been installed yet
 if [[ ! -d "./node_modules" ]]; then
 	echo "Installing node.js libraries..."
-	npm install express@2.5.10 socket.io serialport mongoskin ffi
+	npm install express@2.5.10 socket.io serialport mongoskin execSync
 	echo "Finished installing node.js libraries"
 fi
 

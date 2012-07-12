@@ -10,12 +10,8 @@ var fs = require('fs'); // Filesystem Access (writing files)
 var os = require("os"); //OS lib, used here for detecting which operating system we're using
 var util = require("util");
 
-//Library for executing shell commands from node
-var FFI = require("ffi")
-var libc = new FFI.Library(null, {
-	"system": ["int32", ["string"]]
-});
-var run = libc.system
+//Library for synchronously executing shell commands from node
+var execSync = require("execSync")
 
 var express = require('express'), //App Framework (similar to web.py abstraction)
     app = express.createServer();
@@ -176,11 +172,11 @@ function setStuff(req,res)
 		collectiontoexport = req.body.exportcsv
 		console.log("Exporting database", collectiontoexport, "to CSV")
 		if (os.platform().substring(0,3) == "win") {
-			run("cd .. && mkdir CSVfiles")
+			execSync.code("cd .. && mkdir CSVfiles")
 		}
 		mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
 		//console.log(mongoexportcmd)
-		run(mongoexportcmd)
+		execSync.code(mongoexportcmd)
 	}
 	var holdup = false
 	//If abstracted command (potentiostat,cv, etc)
@@ -607,9 +603,9 @@ function blink() {
 }
 
 function firmware() {
-	serialPort = "null"
-	run("cd ../Firmware/avrdude && ./uploadFirmware.sh " + process.argv[2])
-	run("cd ../../Software")
+	serialPort.close()
+	execSync.code("cd ../Firmware/avrdude && ./uploadFirmware.sh " + process.argv[2])
+	execSync.code("cd ../../Software")
 	serialPort = connectToSerial()
 }
 
