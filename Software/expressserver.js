@@ -832,7 +832,12 @@ commandWriter = setInterval(function(){
 	{
 		sout = queuer.shift();
 		//if (sout != "s0000") console.log(sout);
-		serialPort.write(sout);	
+		if(sout.length != 5) {
+			console.log("Not sending invalid command '"+sout+"'")
+		}
+		else {
+			serialPort.write(sout);	
+		}
 	}
 },queue_write_rate)
 
