@@ -255,13 +255,26 @@ $("#startcv").click(function(){
 	});	
 });
 
+$("#check_firmware").click(function() {
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {command:"check_firmware",value:""},
+		success: function(stuff){
+			$("#check_firmware_result").html(stuff["firmwareresult"])
+		}
+	});		
+});
+
 $("#upload_firmware").click(function() {
 	$.ajax({
 		type: 'POST',
 		dataType: "json",
 		async: true,
 		url: '/senddata',
-		data: {command:"firmware",value:""},
+		data: {command:"upload_firmware",value:""},
 		success: function(stuff){
 			$("#status").html("Firmware uploaded").fadeIn().fadeOut()
 		}

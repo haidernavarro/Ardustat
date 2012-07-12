@@ -243,9 +243,13 @@ function setStuff(req,res)
 			console.log("Blinking")
 			blink();
 		}
-		if (command == "firmware") {
+		if (command == "upload_firmware") {
 			console.log("Uploading firmware")
-			firmware();
+			upload_firmware();
+		}
+		if (command == "check_firmware") {
+			console.log("Checking firmware")
+			req.body.firmwareresult = check_firmware();
 		}
 	}
 	
@@ -271,7 +275,6 @@ function setStuff(req,res)
 			})		
 		}
 	}
-
 	if (!holdup) res.send(req.body)
 	
 }
@@ -602,11 +605,25 @@ function blink() {
 	toArd(" ",0000)
 }
 
-function firmware() {
+function upload_firmware() {
 	serialPort.close()
 	execSync.code("cd ../Firmware/avrdude && ./uploadFirmware.sh " + process.argv[2])
 	execSync.code("cd ../../Software")
 	serialPort = connectToSerial()
+}
+
+function check_firmware() {
+	serialPort.close()
+	firmware_result = execSync.stdout("node ./detectIfFirmwareLoaded.js "+process.argv[2])
+	serialPort = connectToSerial()
+	if(firmware_result == "firmware\n") {
+		console.log("Firmware is installed on "+process.argv[2])
+		return "Firmware is installed"
+	}
+	else {
+		console.log("Firmware does not appear to be installed on "+process.argv[2])
+		return "Firmware does not appear to be installed"
+	}
 }
 
 //Global Functions for Data Parsing
