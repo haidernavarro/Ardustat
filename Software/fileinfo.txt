@@ -1,100 +1,64 @@
+.
+|-- Ardustat\ Installer.app <-----------Platypus-based app wrapper for launchinstall.scpt
+|   `-- Contents
+|       |-- Info.plist
+|       |-- MacOS
+|       |   `-- Ardustat\ Installer
+|       `-- Resources
+|           |-- AppSettings.plist
+|           |-- MainMenu.nib
+|           |-- appIcon.icns
+|           `-- script -> ../../../Software/launchinstall.scpt   <-Symbolic link to Applescript file that tells Terminal to open up and start the install script.
+|-- Ardustat.app <----------------------Platypus-based app wrapper for startArdustat.sh
+|   `-- Contents
+|       |-- Info.plist
+|       |-- MacOS
+|       |   `-- Ardustat
+|       `-- Resources
+|           |-- AppSettings.plist
+|           |-- MainMenu.nib
+|           |-- Software -> ../../../Software <-Symbolic link to Software directory
+|           |-- appIcon.icns
+|           `-- script -> ../../../startArdustat.sh <-Symbolic link to startArdustat.sh script
 |-- Firmware
+|   |-- avrdude
+|   |   |-- firmware_12s.hex <----------Compiled form of firmware_12s.ino uploaded by avrdude
+|   |   `-- uploadFirmware.sh <---------Tells avrdude to upload firmware_12s.hex
 |   `-- firmware_12s
-|       `-- firmware_12s.pde <----------The Ardustat firmware file
+|       `-- firmware_12s.ino <----------Firmware source code
 |-- Schematics
 |   `-- EAGLE
-|       |-- ardustat.lbr  <-------------EAGLE library of parts for ardustat
-|       `-- v9
+|       |-- ardustat.lbr <--------------EAGLE library of parts for ardustat
+|       |-- v10 <-----------------------EAGLE schematic for board version 10
+|       |   |-- ardustatversion10.brd
+|       |   `-- ardustatversion10.sch 
+|       `-- v9  <-----------------------EAGLE schematic for board version 9
 |           |-- ardustatversion9.b##
 |           |-- ardustatversion9.b#1
-|           |-- ardustatversion9.brd <--Main EAGLE files
-|           |-- ardustatversion9.pdf    |
-|           `-- ardustatversion9.sch <--'
+|           |-- ardustatversion9.brd
+|           |-- ardustatversion9.pdf
+|           `-- ardustatversion9.sch
 |-- Software
-|   |-- config.rc <---------------------Tells startArdustat.sh whether this is the first run
-|   |-- cv.html <-----------------------HTML file for cyclic voltometry
-|   |-- cv_viewer.html <----------------HTML file for plotting MongoDB database logs of cyclic voltometry experiments
-|   |-- cycler.html <-------------------HTML file for cycling
-|   |-- debug.html <--------------------HTML file for debugging, calibration, setting ID, direct commands
-|   |-- exportData.sh <-----------------Converts MongoDB database logs to CSV files
+|   |-- cv.html
+|   |-- cv_viewer.html
+|   |-- cycler.html
+|   |-- debug.html
+|   |-- detectIfFirmwareLoaded.js <-----Accepts a device file as 1st argument, prints "firmware" if firmware has been uploaded, "nofirmware" if firmware is not detected
 |   |-- expressserver.js <--------------Main file that does almost everything, including acting as a web server, processing and sending commands, etc
-|   |-- flot <--------------------------Library w/jQuery for plotting data
-|   |   |-- API.txt
-|   |   |-- FAQ.txt
-|   |   |-- LICENSE.txt
-|   |   |-- Makefile
-|   |   |-- NEWS.txt
-|   |   |-- PLUGINS.txt
-|   |   |-- README.txt
-|   |   |-- build_dom.js <--------------HTML code for forms, graphs, etc. Called by HTML files to populate empty <div>'s
-|   |   |-- examples
-|   |   |   |-- ajax.html
-|   |   |   |-- annotating.html
-|   |   |   |-- arrow-down.gif
-|   |   |   |-- arrow-left.gif
-|   |   |   |-- arrow-right.gif
-|   |   |   |-- arrow-up.gif
-|   |   |   |-- basic.html
-|   |   |   |-- graph-types.html
-|   |   |   |-- hs-2004-27-a-large_web.jpg
-|   |   |   |-- image.html
-|   |   |   |-- index.html
-|   |   |   |-- interacting-axes.html
-|   |   |   |-- interacting.html
-|   |   |   |-- layout.css
-|   |   |   |-- multiple-axes.html
-|   |   |   |-- navigate.html
-|   |   |   |-- percentiles.html
-|   |   |   |-- pie.html
-|   |   |   |-- realtime.html
-|   |   |   |-- resize.html
-|   |   |   |-- selection.html
-|   |   |   |-- setting-options.html
-|   |   |   |-- stacking.html
-|   |   |   |-- symbols.html
-|   |   |   |-- thresholding.html
-|   |   |   |-- time.html
-|   |   |   |-- tracking.html
-|   |   |   |-- turning-series.html
-|   |   |   |-- visitors.html
-|   |   |   `-- zooming.html
-|   |   |-- excanvas.js
-|   |   |-- excanvas.min.js
-|   |   |-- functions.js <--------------All Javascript code used by HTML files, to plot graphs, request info with AJAX, etc is here
-|   |   |-- jquery.colorhelpers.js
-|   |   |-- jquery.colorhelpers.min.js
-|   |   |-- jquery.flot.crosshair.js
-|   |   |-- jquery.flot.crosshair.min.js
-|   |   |-- jquery.flot.fillbetween.js
-|   |   |-- jquery.flot.fillbetween.min.js
-|   |   |-- jquery.flot.image.js
-|   |   |-- jquery.flot.image.min.js
-|   |   |-- jquery.flot.js
-|   |   |-- jquery.flot.min.js
-|   |   |-- jquery.flot.navigate.js
-|   |   |-- jquery.flot.navigate.min.js
-|   |   |-- jquery.flot.pie.js
-|   |   |-- jquery.flot.pie.min.js
-|   |   |-- jquery.flot.resize.js
-|   |   |-- jquery.flot.resize.min.js
-|   |   |-- jquery.flot.selection.js
-|   |   |-- jquery.flot.selection.min.js
-|   |   |-- jquery.flot.stack.js
-|   |   |-- jquery.flot.stack.min.js
-|   |   |-- jquery.flot.symbol.js
-|   |   |-- jquery.flot.symbol.min.js
-|   |   |-- jquery.flot.threshold.js
-|   |   |-- jquery.flot.threshold.min.js
-|   |   |-- jquery.js
-|   |   |-- jquery.min.js
+|   |-- fileinfo.txt
+|   |-- flot <--------------------------Everything in this folder besides the files listed here is unmodified code for the flot library
+|   |   |-- build_dom.js <--------------All the important HTML code is really here. Embedding this adds html to empty <divs> in the .html files
+|   |   |-- functions.js <--------------All javascript code
 |   |   `-- style.css <-----------------Stylesheet
-|   |-- getlogs.html <------------------HTML file for serving a list of MongoDB database logs
-|   |-- index.html <--------------------HTML file for default page
-|   |-- initializeNodeJS.bat <----------Windows shell script to install Node.JS libraries
-|   |-- initializeNodeJS.sh <-----------Bash (Mac/Linux) shell script to install Node.JS libraries
-|   |-- inode.js <----------------------iPython replacement used to execute expressserver.js interactively
-|   `-- plotter.html <------------------Plots MongoDB database graphs
+|   |-- getlogs.html
+|   |-- index.html
+|   |-- initializeNodeJS.bat <----------Windows batch script that tells npm to install libraries
+|   |-- inode.js <----------------------For executing node.js scripts interactively
+|   |-- launchinstall.scpt <------------AppleScript that launches Terminal to execute macInstallWithHomebrew.sh
+|   |-- macInstallWithHomebrew.sh <-----On Mac, installs homebrew, then Node.js, MongoDB, and AVRDUDE
+|   `-- plotter.html
 |-- license.txt
-|-- readme.mdown
-`-- startArdustat.sh <------------------Starts MongoDB in background if not already running, detects first run from config.rc and calls initializeNodeJS.sh if so, then detects arduinos and runs expressserver on them
+|-- readme.mdown 
+`-- startArdustat.sh <------------------Startup script. Checks whether all dependencies are installed, installs node.js libraries, detects arduinos, calls expressserver.js. Mac and Linux.
 
+19 directories, 109 files
