@@ -2,40 +2,34 @@
 
 cd ./Software
 
-firstrun=`sed -n '1p' ./config.rc`	#The first line of the file named 'config.rc'
 unamestr=`uname`							#The architecture of the machine
 
 if [[ "$unamestr" == 'Darwin' ]]; then
-	PATH=$PATH:/usr/local/bin/ #Fix Platypus-related bug with not recognizing node files
+	PATH=$PATH:/usr/local/bin/ #Fix Platypus-related bug with incorrect PATH
 fi
 
-if [[ "$firstrun" == 'firstrun' ]]; then
-	echo "First run."
-	if [[ "$unamestr" == 'Darwin' ]]; then
-		echo "Mac OS X detected."
-		nodejsisinstalled=`type -P node | wc -l | sed -e 's/^[ \t]*//'`
-		if [[ "$nodejsisinstalled" == '0' ]]; then
-			echo "Node.JS is not yet installed."
-			exit 1;
-		fi
-		mongodbisinstalled=`type -P mongo | wc -l | sed -e 's/^[ \t]*//'`
-		if [[ "$mongodbisinstalled" == '0' ]]; then
-			echo "MongoDB is not yet installed."
-			exit 1;
-		fi
-		avrdudeisinstalled=`type -P avrdude | wc -l | sed -e 's/^[ \t]*//'`
-		if [[ "$avrdudeisinstalled" == '0' ]]; then
-			echo "AVRDUDE is not yet installed."
-			exit 1;
-		fi
-		echo "All dependencies are installed."
-	fi
-	
+#Test to see whether everything has been installed
+nodejsisinstalled=`type -P node | wc -l | sed -e 's/^[ \t]*//'`
+if [[ "$nodejsisinstalled" == '0' ]]; then
+	echo "Node.JS is not yet installed."
+	exit 1;
+fi
+mongodbisinstalled=`type -P mongo | wc -l | sed -e 's/^[ \t]*//'`
+if [[ "$mongodbisinstalled" == '0' ]]; then
+	echo "MongoDB is not yet installed."
+	exit 1;
+fi
+avrdudeisinstalled=`type -P avrdude | wc -l | sed -e 's/^[ \t]*//'`
+if [[ "$avrdudeisinstalled" == '0' ]]; then
+	echo "AVRDUDE is not yet installed."
+	exit 1;
+fi
+echo "All dependencies are installed."
+
+#Install node.js libraries if they haven't been installed yet
+if [[ ! -d "./node_modules" ]]; then
 	echo "Installing node.js libraries..."
-	bash ./initializeNodeJS.sh
-	rm ./config.rc
-	touch ./config.rc
-	echo notfirstrun > ./config.rc
+	npm install express@2.5.10 socket.io serialport mongoskin ffi
 	echo "Finished installing node.js libraries"
 fi
 
@@ -45,6 +39,8 @@ if [[ $daemonisrunning == "0" ]]; then
 	mongod --quiet &
 fi
 
+
+#Detect arduino device files
 if [[ "$unamestr" == 'Linux' ]]; then
 	arduinos=`ls -d /dev/* | grep tty[UA][SC][BM]` 				#anything of the form /dev/ttyACM* or /dev/ttyUSB*
 	numofarduinos=`ls -d /dev/* | grep tty[UA][SC][BM] | wc -l` #number of results returned
@@ -57,21 +53,15 @@ if [[ $arduinos == "" ]]; then
 	echo No arduinos found
 	exit
 fi
+
+#Start express server
 if [[ $numofarduinos == "1" ]]; then
-	needsfirmware=`node detectIfFirmwareLoaded.js $arduinos`
-	if [[ $needsfirmware == "nofirmware" ]]; then
-		echo "Arduino on $arduinos does not appear to be loaded with firmware. Please upload the firmware to the ardustat."
-	fi
 	node expressserver.js $arduinos $1 $2 $3
 	exit
 fi
 echo You appear to have multiple arduinos connected. Please select one:
 select fname in $arduinos;
 do
-	needsfirmware=`node detectIfFirmwareLoaded.js $fname`
-	if [[ $needsfirmware == "nofirmware" ]]; then
-		echo "Arduino on $fname does not appear to be loaded with firmware. Please upload the firmware to the ardustat."
-	fi
 	node expressserver.js $fname $1 $2 $3
 	break;
 done

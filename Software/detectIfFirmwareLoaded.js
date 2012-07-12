@@ -39,6 +39,7 @@ function gotData(data) {
 	if(data.search("GO")>-1) {
 		if(data.search("ST")>-1) {
 			console.log("firmware")
+			serialPort.close()
 			process.exit()
 		}
 	}
@@ -48,5 +49,6 @@ dataWriter = setInterval(function() {serialPort.write("s0000")},100)
 
 timeOut = setInterval(function() {
 	console.log("nofirmware")
+	serialPort.close()
 	process.exit()
 }, 3000)
