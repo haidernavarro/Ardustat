@@ -10,8 +10,8 @@ var fs = require('fs'); // Filesystem Access (writing files)
 var os = require("os"); //OS lib, used here for detecting which operating system we're using
 var util = require("util");
 
-//Library for synchronously executing shell commands from node
-var execSync = require("execSync")
+var exec = require("child_process").exec;
+function log_stdout(error, stdout, stderr) { console.log(stdout) } //For executing command line arguments
 
 var express = require('express'), //App Framework (similar to web.py abstraction)
     app = express.createServer();
@@ -171,12 +171,8 @@ function setStuff(req,res)
 	{	
 		collectiontoexport = req.body.exportcsv
 		console.log("Exporting database", collectiontoexport, "to CSV")
-		if (os.platform().substring(0,3) == "win") {
-			execSync.code("cd .. && mkdir CSVfiles")
-		}
 		mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
-		//console.log(mongoexportcmd)
-		execSync.code(mongoexportcmd)
+		exec(mongoexportcmd, log_stdout)
 	}
 	var holdup = false
 	//If abstracted command (potentiostat,cv, etc)
@@ -249,7 +245,8 @@ function setStuff(req,res)
 		}
 		if (command == "check_firmware") {
 			console.log("Checking firmware")
-			req.body.firmwareresult = check_firmware();
+			holdup = true
+			check_firmware(req,res)
 		}
 	}
 	
@@ -607,23 +604,26 @@ function blink() {
 
 function upload_firmware() {
 	serialPort.close()
-	execSync.code("cd ./avrdude && ./uploadFirmware.sh " + process.argv[2])
-	execSync.code("cd ..")
-	serialPort = connectToSerial()
+	exec("cd ./avrdude && ./uploadFirmware.sh " + process.argv[2] +" && cd ..", 
+	     function(error, stdout, stderr) {serialPort = connectToSerial()})
 }
 
-function check_firmware() {
+function check_firmware(req, res) {
 	serialPort.close()
-	firmware_result = execSync.stdout("node ./detectIfFirmwareLoaded.js "+process.argv[2])
-	serialPort = connectToSerial()
-	if(firmware_result == "firmware\n") {
-		console.log("Firmware is installed on "+process.argv[2])
-		return "Firmware is installed"
-	}
-	else {
-		console.log("Firmware does not appear to be installed on "+process.argv[2])
-		return "Firmware does not appear to be installed"
-	}
+	check_firmware_request = req
+	check_firmware_response = res
+	exec("node ./detectIfFirmwareLoaded.js "+process.argv[2], function(error, stdout, stderr) {
+		serialPort = connectToSerial()
+		if(stdout == "firmware\n") {
+			console.log("Firmware is installed on "+process.argv[2])
+			check_firmware_request.body.firmwareresult = "Firmware is installed"
+		}
+		else {
+			console.log("Firmware does not appear to be installed on "+process.argv[2])
+			check_firmware_request.body.firmwareresult = "Firmware does not appear to be installed"
+		}
+		check_firmware_response.send(check_firmware_request.body)
+	})
 }
 
 //Global Functions for Data Parsing
@@ -849,7 +849,14 @@ commandWriter = setInterval(function(){
 			console.log("Not sending invalid command '"+sout+"'")
 		}
 		else {
-			serialPort.write(sout);	
+			try {
+				serialPort.write(sout);	
+			}
+			catch(err) {
+				if(sout != "s0000") {
+					console.log("Failed to send",sout,"to serial port.")
+				}
+			}
 		}
 	}
 },queue_write_rate)
