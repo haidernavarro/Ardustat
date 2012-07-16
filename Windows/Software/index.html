@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<LINK REL=StyleSheet HREF="/flot/style.css" TYPE="text/css" MEDIA=screen>
+		<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+		<script src="/socket.io/socket.io.js"></script>	
+	</head>
+	<body>
+		<div class="plots">
+			<div class="graphtitle">Potential (V)</div>
+			<div id="flot_potential" class="plot"></div>
+			<div class="graphtitle">Current (A)</div>	
+			<div id="flot_current" class="plot"></div>
+		</div>
+		<div id="container">
+			<div class="links">
+				<a href="/cycler">Cycling</a>&nbsp;|&nbsp;
+				<a href="/debug">Calibration, Setting ID, Direct Commands, Installing Firmware</a>&nbsp;|&nbsp;
+				<a href="/cv">Cyclic Voltometry</a>&nbsp;|&nbsp;
+				<a href="/getlogs">View Logs</a>
+			</div>
+			<div class="title">Manual Control:</div>
+			<div id="commanders" class="cmds"> </div>
+			<div class="title">Logging:</div>
+			<div id="loggers" class="cmds"></div>
+			<div class="title">Finding error:</div>
+			<div id="finding_error" class="cmds"></div>
+		</div>
+		<script src="/flot/build_dom.js"></script>
+		<script src="/flot/functions.js"></script> 
+	</body>
+</html>

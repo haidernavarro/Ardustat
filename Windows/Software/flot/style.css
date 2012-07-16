@@ -1,0 +1,52 @@
+	body
+	{
+		font-family: Helvetica;
+		overflow-x:hidden;
+		
+	}
+	.cmds
+	{
+		width:800px;
+		padding-left:100px;
+		margin: auto auto;
+		text-align:left;
+	}
+	.title
+	{
+		padding:10px;
+		width:800px;
+		margin: auto auto;
+		text-align: left;
+		font-size: 1.25em;
+	}
+	.graphtitle
+	{
+		padding:10px;
+		width:800px;
+		margin: auto auto;
+		text-align: center;
+		font-size: 1.25em;
+	}
+	.plots
+	{
+		margin: 10px 30px 10px 30px;
+	}
+	.plot
+	{
+		width:auto;
+		height:300px; 
+		margin: auto auto;
+		padding: 100px 100px;
+	}
+	.setting_input
+	{
+		width:60;
+	}
+	.debuggraph {
+		width:800px;
+		height:300px;
+		margin: auto auto;
+	}
+	.links {
+		text-align: center;
+	}

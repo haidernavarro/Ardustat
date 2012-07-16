@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<LINK REL=StyleSheet HREF="/flot/style.css" TYPE="text/css" MEDIA=screen>
+	</head>
+	<body>
+		<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+
+		<div class="plots">
+			<div class="graphtitle">C vs. V</div>
+			<div id="flot_cv" class="plot"></div>
+		</div>
+
+		<div id="cvcommanders" class="cmd"></div>
+		<div class="title">CV Status/Settings</div>
+			
+		<div id="cvstatus" class="cmd"></div><br><br>
+		<div id="commanders" class="cmd"></div>
+		<div id="loggers" class="cmd"></div>
+
+		<script language="javascript" type="text/javascript" src="/flot/build_dom.js"></script>
+		<script language="javascript" type="text/javascript" src="/flot/functions.js"></script>
+
+	</body>	
+</html>

@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<LINK REL=StyleSheet HREF="/flot/style.css" TYPE="text/css" MEDIA=screen>
+		<script language="javascript" type="text/javascript" src="/flot/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="/flot/jquery.flot.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<div id="debuggraph" class="debuggraph"></div>
+		<table style="height:450">
+			<tr>
+				<td>
+					<div class="title">Calibration:</div>
+					<div id="calibrate" class="cmds"></div>
+					<div class="title">Set ID:</div>
+					<div id="idset" class="cmds"></div>
+					<div class="title">Send direct command:</div>
+					<div id="directcmd" class="cmds"></div>
+					<div class="title">Check if firmware is installed:</div>
+					<div id="check_firmware_div" class="cmds"> </div>
+					<div class="title">Uploading Firmware:</div>
+					<div id="upload_firmware_div" class="cmds"> </div>
+				</td>
+				<td><div id="debug_info"></div></td>
+			</tr>
+		</table>
+		<script src="/flot/build_dom.js"></script>
+		<script src="/flot/functions.js"></script> 
+	</body>
+</html>
