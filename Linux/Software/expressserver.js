@@ -607,8 +607,8 @@ function blink() {
 
 function upload_firmware() {
 	serialPort.close()
-	execSync.code("cd ../Firmware/avrdude && ./uploadFirmware.sh " + process.argv[2])
-	execSync.code("cd ../../Software")
+	execSync.code("cd ./avrdude && ./uploadFirmware.sh " + process.argv[2])
+	execSync.code("cd ..")
 	serialPort = connectToSerial()
 }
 
