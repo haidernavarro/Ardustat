@@ -171,7 +171,7 @@ function setStuff(req,res)
 	{	
 		collectiontoexport = req.body.exportcsv
 		console.log("Exporting database", collectiontoexport, "to CSV")
-		mongoexportcmd = "mongoexport -csv -o ../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
+		mongoexportcmd = "mongoexport -csv -o ../../../../CSVfiles/" + collectiontoexport + ".csv -d ardustat -c " + collectiontoexport + " -f time,cell_potential,working_potential,current"
 		exec(mongoexportcmd, log_stdout)
 	}
 	var holdup = false
