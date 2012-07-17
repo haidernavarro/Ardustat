@@ -23,8 +23,6 @@ arduino] (http://arduino.cc/en/Guide/HomePage)).
 - [AVRDUDE] (http://www.nongnu.org/avrdude/)
 <br>Note: If you use Windows, you can install AVRDUDE by installing [WinAVR] (http://winavr.sourceforge.net/download.html)
 - If you use Mac OS X, you will also need to install [XCode] (https://developer.apple.com/xcode/). After that, all software except for the arduino drivers can be installed automatically by running the Ardustat Installer app (be sure to enter your password if prompted by the terminal).
-- If you use Windows, you'll also need to install [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express) so that Node.JS can compile the libraries correctly, and [Arduino] (http://arduino.cc/en/Main/Software) so that you can install the firmware.
-
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
 	
@@ -32,7 +30,7 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 1. Depending on your operating system:
 <br> Mac OS X: Double click on the "Ardustat" application
 <br> Linux: Execute the bash script startArdustat.sh
-<br> Windows: Install the firmware manually using the Arduino software, go to the Software folder, run initializeNodeJS.bat, then execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port)
+<br> Windows: Go to the Software folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port)
 2. In a browser, go to http://localhost:8888/debug
 	(stuff should be happening)
 3. Upload the firmware by clicking the button marked "Upload Firmware"
@@ -44,8 +42,8 @@ Note: This software is not tested with Internet Explorer or older versions of Fi
 
 From here on out, all you need to do is:
 <br> Mac OS X: Double click on the "Ardustat" application
-<br> Linux: Execute the bash script startArdustat.sh and then go to http://localhost:8888
-<br> Windows: go to the Software folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port)
+<br> Linux: Execute the bash script startArdustat.sh
+<br> Windows: go to the Software folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port, which you can check by going to Start/Devices and Printers)
 Then go to http://localhost:8888/
 
 ##Instructions for regular use:
