@@ -612,7 +612,7 @@ function check_firmware(req, res) {
 	serialPort.close()
 	check_firmware_request = req
 	check_firmware_response = res
-	exec("node ./detectIfFirmwareLoaded.js "+process.argv[2], function(error, stdout, stderr) {
+	exec("../node ./detectIfFirmwareLoaded.js "+process.argv[2], function(error, stdout, stderr) {
 		serialPort = connectToSerial()
 		if(stdout == "firmware\n") {
 			console.log("Firmware is installed on "+process.argv[2])
