@@ -3,6 +3,7 @@
 cd ./Software
 
 PATH=$PATH:/usr/local/bin/ #Fix Platypus-related bug with incorrect PATH
+username=`whoami`
 
 #Test to see whether everything has been installed
 avrdudeisinstalled=`type -P avrdude | wc -l | sed -e 's/^[ \t]*//'`
@@ -15,9 +16,11 @@ echo "All dependencies are installed."
 #Start mongodb daemon if it's not running
 daemonisrunning=`ps -aAc | grep mongod | wc -l | sed -e 's/^[ \t]*//'`
 if [[ $daemonisrunning == "0" ]]; then
-	cd ../mongodb/bin/
-	./mongod --quiet --dbpath=../db&
-	cd ../../Software
+	mkdir ~/Library/Application\ Support/Ardustat/
+	mkdir ~/Library/Application\ Support/Ardustat/mongodb/
+	cd ../mongodb/
+	./mongod --quiet --dbpath=/Users/$username/Library/Application\ Support/Ardustat/mongodb/&
+	cd ../Software
 fi
 
 #Detect arduino device files
