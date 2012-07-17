@@ -604,7 +604,7 @@ function blink() {
 
 function upload_firmware() {
 	serialPort.close()
-	exec("cd ./avrdude && avrdude -F -V -c arduino -p ATMEGA328P -P " + process.argv[2] + " -b 115200 -U flash:w:firmware_12s.hex && cd ..", 
+	exec("cd ../avrdude-bin && ./avrdude -C `pwd`/avrdude.conf -F -V -c arduino -p ATMEGA328P -P "+process.argv[2]+" -b 115200 -U flash:w:../Software/avrdude/firmware_12s.hex", 
 	     function(error, stdout, stderr) {serialPort = connectToSerial()})
 }
 

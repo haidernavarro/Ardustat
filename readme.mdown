@@ -22,7 +22,7 @@ arduino] (http://arduino.cc/en/Guide/HomePage)).
 <br>Note: If you use Windows, you should install MongoDB as a Windows service.
 - [AVRDUDE] (http://www.nongnu.org/avrdude/)
 <br>Note: If you use Windows, you can install AVRDUDE by installing [WinAVR] (http://winavr.sourceforge.net/download.html)
-- If you use Mac OS X, you will also need to install [XCode] (https://developer.apple.com/xcode/). After that, all software except for the arduino drivers can be installed automatically by running the Ardustat Installer app (be sure to enter your password if prompted by the terminal).
+- If you use Mac OS X, all software except for the arduino drivers is contained in the app.
 - If you use Windows, you'll also need to install [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express) so that Node.JS can compile the libraries correctly.
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.

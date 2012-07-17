@@ -5,14 +5,6 @@ cd ./Software
 PATH=$PATH:/usr/local/bin/ #Fix Platypus-related bug with incorrect PATH
 username=`whoami`
 
-#Test to see whether everything has been installed
-avrdudeisinstalled=`type -P avrdude | wc -l | sed -e 's/^[ \t]*//'`
-if [[ "$avrdudeisinstalled" == '0' ]]; then
-	echo "AVRDUDE is not yet installed."
-	exit 1;
-fi
-echo "All dependencies are installed."
-
 #Start mongodb daemon if it's not running
 daemonisrunning=`ps -aAc | grep mongod | wc -l | sed -e 's/^[ \t]*//'`
 if [[ $daemonisrunning == "0" ]]; then
