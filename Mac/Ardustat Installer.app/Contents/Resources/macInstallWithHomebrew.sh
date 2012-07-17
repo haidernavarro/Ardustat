@@ -2,6 +2,7 @@ homebrewisinstalled=`type -P brew | wc -l | sed -e 's/^[ \t]*//'`
 if [[ "$homebrewisinstalled" == '0' ]]; then
 	echo "Homebrew is not yet installed. Installing homebrew..."
 	/usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)" #installs homebrew
+	brew doctor
 fi
 nodejsisinstalled=`type -P node | wc -l | sed -e 's/^[ \t]*//'`
 if [[ "$nodejsisinstalled" == '0' ]]; then
