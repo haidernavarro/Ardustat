@@ -14,16 +14,21 @@ Balasubramanian is supported by NSF CMMI 1031208
 
 ###Installation:
 ####Software that you need to have installed to use the ardustat:
-- FTDI Drivers / Arduino Uno Drivers, depending on which version of arduino you are using (see [Getting Started guide for 
-arduino] (http://arduino.cc/en/Guide/HomePage)).
+#####Mac OS X:
+All software except for the Arduino drivers is already contained in the app, and if you use a non-FDTI based Arduino like the Arduino Uno, you shouldn't have to install drivers. (For FTDI-based Arduinos, see [Getting Started guide for arduino] (http://arduino.cc/en/Guide/HomePage)).
+#####Linux:
+- Arduino Drivers: If you use a non-FDTI based Arduino like the Arduino Uno, you shouldn't have to install drivers. (For FTDI-based Arduinos, see [Getting Started guide for arduino] (http://arduino.cc/en/Guide/HomePage)).
 - [Python 2] (http://www.python.org/download/releases/2.7.2/)
 - [Node.JS] (http://nodejs.org)
 - [MongoDB] (http://www.mongodb.org/downloads) (See Quickstart guide for installation [here] (http://www.mongodb.org/display/DOCS/Quickstart))
-<br>Note: If you use Windows, you should install MongoDB as a Windows service.
 - [AVRDUDE] (http://www.nongnu.org/avrdude/)
-<br>Note: If you use Windows, you can install AVRDUDE by installing [WinAVR] (http://winavr.sourceforge.net/download.html)
-- If you use Mac OS X, all software except for the arduino drivers is contained in the app.
-- If you use Windows, you'll also need to install [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express) so that Node.JS can compile the libraries correctly.
+#####Windows: 
+- Arduino Drivers: To install the Arduino drivers on Windows, see [Getting Started guide for arduino] (http://arduino.cc/en/Guide/HomePage)
+- [Python 2] (http://www.python.org/download/releases/2.7.2/)
+- [Node.JS] (http://nodejs.org)
+- [MongoDB] (http://www.mongodb.org/downloads) -- See Quickstart guide for installation [here] (http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/) and make sure to follow the instructions for installing MongoDB as a Windows service
+- [WinAVR] (http://winavr.sourceforge.net/download.html)
+- [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express)
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
 	
