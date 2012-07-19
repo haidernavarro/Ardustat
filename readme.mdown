@@ -22,6 +22,7 @@ All software except for the Arduino drivers is already contained in the app, and
 - [Node.JS] (http://nodejs.org)
 - [MongoDB] (http://www.mongodb.org/downloads) (See Quickstart guide for installation [here] (http://www.mongodb.org/display/DOCS/Quickstart))
 - [AVRDUDE] (http://www.nongnu.org/avrdude/)
+
 #####Windows: 
 - Arduino Drivers: To install the Arduino drivers on Windows, see [Getting Started guide for arduino] (http://arduino.cc/en/Guide/HomePage)
 - [Python 2] (http://www.python.org/download/releases/2.7.2/)
