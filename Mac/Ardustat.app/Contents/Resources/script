@@ -6,13 +6,17 @@ PATH=$PATH:/usr/local/bin/ #Fix Platypus-related bug with incorrect PATH
 username=`whoami`
 
 #Create directory for calibration files if it doesn't already exist
-mkdir ../../../../Ardustat\ Calibration
+if [[ ! -d "../../../../Ardustat Calibration" ]]; then
+	mkdir ../../../../Ardustat\ Calibration
+fi
 
 #Start mongodb daemon if it's not running
 daemonisrunning=`ps -aAc | grep mongod | wc -l | sed -e 's/^[ \t]*//'`
 if [[ $daemonisrunning == "0" ]]; then
-	mkdir ~/Library/Application\ Support/Ardustat/
-	mkdir ~/Library/Application\ Support/Ardustat/mongodb/
+	if [[ ! -d "/Users/$username/Library/Application Support/Ardustat/mongodb" ]]; then
+		mkdir ~/Library/Application\ Support/Ardustat/
+		mkdir ~/Library/Application\ Support/Ardustat/mongodb/
+	fi
 	cd ../mongodb/
 	./mongod --quiet --dbpath=/Users/$username/Library/Application\ Support/Ardustat/mongodb/&
 	cd ../Software
