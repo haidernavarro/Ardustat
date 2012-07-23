@@ -65,6 +65,13 @@ divvers['check_firmware_div'] = '\
 <button id="check_firmware">Check Firmware</button> \
 <span id="check_firmware_result"></span>'
 
+divvers['customres_div'] = '\
+<input type="textbox" id="customres_value" /> <br> \
+<button id="send_customres">Override</button>'
+
+divvers['customres_clear_div'] = '\
+<button id="send_customres_clear">Clear</button>'
+
 
 for (key in divvers)
 {

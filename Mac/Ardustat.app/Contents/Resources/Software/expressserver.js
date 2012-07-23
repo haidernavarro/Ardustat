@@ -248,6 +248,14 @@ function setStuff(req,res)
 			holdup = true
 			check_firmware(req,res)
 		}
+		if (command == "customres") {
+			console.log("Set custom resistance to:",value)
+			customres = parseFloat(value);
+		}
+		if (command == "customres_clear") {
+			console.log("Cleared custom resistance")
+			customres = null
+		}
 	}
 	
 	if (req.body.programs != undefined)
@@ -631,6 +639,7 @@ id = 20035;
 vpt = undefined; //volts per tick
 mode = 0;
 var res_table;
+customres = null;
 
 //Break Arduino string into useful object
 function data_parse(data)
@@ -704,7 +713,12 @@ function data_parse(data)
 	
 	if (res_table.constructor.toString().indexOf("Object")>-1)
 	{
-		out['resistance'] = res_table[out['res_set']]
+		if (customres == null) {
+			out['resistance'] = res_table[out['res_set']]
+		}
+		else {
+			out['resistance'] = customres
+		}
 		current = (out['dac_potential']-out['cell_potential'])/out['resistance']
 		if (mode == 1) out['current'] = 0
 		else if (high_current) out['current'] = out['Current_pin']

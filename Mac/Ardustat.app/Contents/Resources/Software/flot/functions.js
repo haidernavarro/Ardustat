@@ -281,6 +281,34 @@ $("#upload_firmware").click(function() {
 	});		
 });
 
+$("#send_customres").click(function(){
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {command:"customres",value:$("#customres_value").val()},
+		success: function(stuff){
+			console.log(stuff);
+		}
+	});
+			
+});
+
+$("#send_customres_clear").click(function(){
+	$.ajax({
+		type: 'POST',
+		dataType: "json",
+		async: true,
+		url: '/senddata',
+		data: {command:"customres_clear",value:""},
+		success: function(stuff){
+			console.log(stuff);
+		}
+	});
+			
+})
+
 //Called whenever the user changes a 'potentiostat/galvanostat'
 //dropdown. Changes the rest of the fields so that they match
 //what the user has chosen.
