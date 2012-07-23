@@ -698,7 +698,7 @@ function data_parse(data)
 	{
 		try
 		{
-			res_table = JSON.parse(fs.readFileSync("unit_"+id.toString()+".json").toString())
+			res_table = JSON.parse(fs.readFileSync("../../../../Ardustat Calibration/unit_"+id.toString()+".json").toString())
 			console.log("Loaded calibration table for ID#"+id.toString())
 			
 			
@@ -745,7 +745,7 @@ rfixed = 10000
 function calibrator(value)
 {
 	try {
-		fs.unlinkSync("unit_"+id.toString()+".json")
+		fs.unlinkSync("../../../../Ardustat Calibration/unit_"+id.toString()+".json")
 		console.log("Deleted old calibration table")
 	}
 	catch (err) {
@@ -808,7 +808,7 @@ function calibrate_step()
 				  
 				}
 				//console.log(final_table)
-				fs.writeFileSync("unit_"+id.toString()+".json",JSON.stringify(final_table))
+				fs.writeFileSync("../../../../Ardustat Calibration/unit_"+id.toString()+".json",JSON.stringify(final_table))
 				res_table = undefined;
 			}
 		} 
