@@ -9,8 +9,7 @@ Authors:
 - Rigers Qeraj <rigersqeraj@gmail.com>
 - Susan Tan <onceuponatimeforever@gmail.com>
 
-Rigers, Susan and Eddie were able to work on this because of inspiration by NSF CMMI 1031208  
-Balasubramanian is supported by NSF CMMI 1031208
+Rigers, Susan, Eddie, and Balasubramanian are supported by NSF CMMI 1031208
 
 ###Installation:
 ####Software that you need to have installed to use the ardustat:
