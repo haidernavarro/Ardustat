@@ -1,5 +1,12 @@
 divvers = {}
 
+divvers['links'] = '\
+<a href="/">Home</a>&nbsp;|&nbsp; \
+<a href="/cycler">Cycling</a>&nbsp;|&nbsp; \
+<a href="/debug">Calibration, Setting ID, Direct Commands, Installing Firmware</a>&nbsp;|&nbsp; \
+<a href="/cv">Cyclic Voltometry</a>&nbsp;|&nbsp; \
+<a href="/getlogs">View Logs</a>'
+
 divvers['commanders'] = '\
 <select id="mode_choices"> \
   <option>potentiostat</option> \
