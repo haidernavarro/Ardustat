@@ -1,4 +1,4 @@
-//expresserver.js: main ardustat control code
+//expressserver.js: main ardustat control code
 
 //********************
 //Initialization/Setup
@@ -562,12 +562,14 @@ function galvanostat(current)
 }
 
 function galvanostat_highcurrent(current) {
-	delta_potential = (current/coefficient)*resistance
+	if(customres == null) {
+		delta_potential = (current/coefficient)*resistance
+	else {
+		delta_potential = (current/coefficient)*customres
+	}
 	value_to_ardustat = delta_potential / volts_per_tick;
 	toArd("r",parseInt(0))
 	toArd("H",parseInt(value_to_ardustat))
-	toArd("H",parseInt(value_to_ardustat)) //Send command twice to make sure
-											//that the Ardustat gets it
 }
 
 function galvanostat_lowcurrent(current) {
@@ -586,12 +588,13 @@ function galvanostat_lowcurrent(current) {
 				set_best = key
 			}
 		}
-		delta_potential = current*r_best
+		if(customres == null) {
+			delta_potential = current*r_best
+		else {
+			delta_potential = current*customres
+		}
 		value_to_ardustat = delta_potential / volts_per_tick;
 	
-		toArd("r",parseInt(set_best))
-		toArd("g",parseInt(value_to_ardustat))
-		//Send commands twice to make sure that the Ardustat gets them
 		toArd("r",parseInt(set_best))
 		toArd("g",parseInt(value_to_ardustat))
 }
