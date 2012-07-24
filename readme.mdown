@@ -14,7 +14,7 @@ Rigers, Susan, Eddie, and Balasubramanian are supported by NSF CMMI 1031208
 ###Installation:
 ####Software that you need to have installed to use the ardustat:
 #####Mac OS X:
-All software except for the Arduino drivers is already contained in the app, and if you use a non-FDTI based Arduino like the Arduino Uno, you shouldn't have to install drivers. (For FTDI-based Arduinos, download the FTDI drivers [here] (http://www.ftdichip.com/Drivers/VCP.htm).)
+All software is contained in the app.
 #####Linux:
 - Arduino Drivers: You shouldn't need to install Arduino drivers on Linux. However, if you get an error message like "No arduinos found" even when your Ardustat is plugged in, it may indicate driver issues. In that case, see the guide [here] (http://www.arduino.cc/playground/Learning/Linux).
 - [Python 2] (http://www.python.org/download/releases/2.7.2/)
@@ -31,7 +31,9 @@ All software except for the Arduino drivers is already contained in the app, and
 - [Visual C++ 2010] (http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express)
 
 Note: This software is not tested with Internet Explorer or older versions of Firefox, Safari, Chrome, etc. To avoid unpredictable results, please use a modern browser.
-	
+<br>
+Note: If you use an FTDI-based Arduino (NG, Diecimila, or Duemilanove), you will need to download the Arduino software [here] (http://arduino.cc/en/Main/Software) and manually upload the firmware file located in the Firmware/firmware_12s folder.
+
 ###Instructions for first run:
 1. Depending on your operating system:
 <br> Mac OS X: Double click on the "Ardustat" application
