@@ -27,8 +27,8 @@ if [[ $daemonisrunning == "0" ]]; then
 fi
 
 #Detect arduino device files
-arduinos=`ls -d /dev/* | grep tty[UA][SC][BM]` 				#anything of the form /dev/ttyACM* or /dev/ttyUSB*
-numofarduinos=`ls -d /dev/* | grep tty[UA][SC][BM] | wc -l` #number of results returned
+arduinos=`ls -d /dev/* | grep -e ttyUSB -e ttyACM` 				#anything of the form /dev/ttyACM* or /dev/ttyUSB*
+numofarduinos=`ls -d /dev/* | grep -e ttyUSB -e ttyACM | wc -l` #number of results returned
 if [[ $arduinos == "" ]]; then
 	echo No arduinos found
 	exit
