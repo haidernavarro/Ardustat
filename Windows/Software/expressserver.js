@@ -564,6 +564,7 @@ function galvanostat(current)
 function galvanostat_highcurrent(current) {
 	if(customres == null) {
 		delta_potential = (current/coefficient)*resistance
+	}
 	else {
 		delta_potential = (current/coefficient)*customres
 	}
@@ -590,6 +591,7 @@ function galvanostat_lowcurrent(current) {
 		}
 		if(customres == null) {
 			delta_potential = current*r_best
+		}
 		else {
 			delta_potential = current*customres
 		}
