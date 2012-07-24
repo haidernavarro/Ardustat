@@ -14,16 +14,16 @@ Rigers, Susan, Eddie, and Balasubramanian are supported by NSF CMMI 1031208
 ###Installation:
 ####Software that you need to have installed to use the ardustat:
 #####Mac OS X:
-All software except for the Arduino drivers is already contained in the app, and if you use a non-FDTI based Arduino like the Arduino Uno, you shouldn't have to install drivers. (For FTDI-based Arduinos, see [Getting Started guide for arduino] (http://arduino.cc/en/Guide/HomePage)).
+All software except for the Arduino drivers is already contained in the app, and if you use a non-FDTI based Arduino like the Arduino Uno, you shouldn't have to install drivers. (For FTDI-based Arduinos, download the FTDI drivers [here] (http://www.ftdichip.com/Drivers/VCP.htm).)
 #####Linux:
-- Arduino Drivers: If you use a non-FDTI based Arduino like the Arduino Uno, you shouldn't have to install drivers. (For FTDI-based Arduinos, see [Getting Started guide for arduino] (http://arduino.cc/en/Guide/HomePage)).
+- Arduino Drivers: You shouldn't need to install Arduino drivers on Linux. However, if you get an error message like "No arduinos found" even when your Ardustat is plugged in, it may indicate driver issues. In that case, see the guide [here] (http://www.arduino.cc/playground/Learning/Linux).
 - [Python 2] (http://www.python.org/download/releases/2.7.2/)
 - [Node.JS] (http://nodejs.org)
 - [MongoDB] (http://www.mongodb.org/downloads) (See Quickstart guide for installation [here] (http://www.mongodb.org/display/DOCS/Quickstart))
 - [AVRDUDE] (http://www.nongnu.org/avrdude/)
 
 #####Windows: 
-- Arduino Drivers: To install the Arduino drivers on Windows, see [Getting Started guide for arduino] (http://arduino.cc/en/Guide/HomePage)
+- Arduino Drivers: To install the Arduino drivers on Windows, see [Getting Started Guide for Arduino] (http://arduino.cc/en/Guide/Windows).
 - [Python 2] (http://www.python.org/download/releases/2.7.2/)
 - [Node.JS] (http://nodejs.org)
 - [MongoDB] (http://www.mongodb.org/downloads) -- See Quickstart guide for installation [here] (http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/) and make sure to follow the instructions for installing MongoDB as a Windows service
@@ -52,7 +52,7 @@ From here on out, all you need to do is:
 <br> Windows: go to the Software folder and execute: node expressserver.js COM4 (replace COM4 with your arduino's actual COM port, which you can check by going to Start/Devices and Printers)
 Then go to http://localhost:8888/
 
-##Instructions for regular use:
+###Instructions for regular use:
 - For basic manual control, go to localhost:8888/.
 - For cycling, go to localhost:8888/cycler.
 - For cyclic voltometry, go to localhost:8888/cv.
