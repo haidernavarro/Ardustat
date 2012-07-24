@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.2">
+<eagle version="6.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -654,6 +654,30 @@
 <text x="-2.097" y="2.342" size="0.8128" layer="25">&gt;NAME</text>
 <text x="-2.1" y="-3.215" size="0.8128" layer="27">&gt;VALUE</text>
 </package>
+<package name="CD4066">
+<smd name="P$1" x="-2.7" y="3.81" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$2" x="-2.7" y="2.54" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$3" x="-2.7" y="1.27" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$4" x="-2.7" y="0" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$5" x="-2.7" y="-1.27" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$6" x="-2.7" y="-2.54" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$7" x="-2.7" y="-3.81" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$8" x="2.7" y="-3.81" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$9" x="2.7" y="-2.54" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$10" x="2.7" y="-1.27" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$11" x="2.7" y="0" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$12" x="2.7" y="1.27" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$13" x="2.7" y="2.54" dx="1.27" dy="0.51" layer="1"/>
+<smd name="P$14" x="2.7" y="3.81" dx="1.27" dy="0.51" layer="1"/>
+<wire x1="-2.024" y1="4.314" x2="-2.024" y2="4.243" width="0.127" layer="21"/>
+<wire x1="-2.024" y1="-4.172" x2="2.059" y2="-4.172" width="0.127" layer="21"/>
+<wire x1="2.059" y1="-4.172" x2="2.059" y2="4.243" width="0.127" layer="21"/>
+<wire x1="-2.012" y1="-4.171" x2="-2.021" y2="-4.171" width="0.127" layer="21"/>
+<wire x1="-2.021" y1="-4.171" x2="-2.021" y2="4.25" width="0.127" layer="21"/>
+<wire x1="-2.025" y1="4.292" x2="2.06" y2="4.292" width="0.127" layer="21"/>
+<wire x1="2.06" y1="4.292" x2="2.06" y2="4.081" width="0.127" layer="21"/>
+<circle x="-1.42" y="3.71" radius="0.36955625" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="NTE_R56-1D.5-6">
@@ -1164,6 +1188,43 @@
 <text x="-7.366" y="10.668" size="1.27" layer="95">&gt;NAME</text>
 <text x="-7.112" y="-11.684" size="1.27" layer="96">&gt;VALUE</text>
 </symbol>
+<symbol name="CD4066">
+<pin name="AIN/OUT" x="-12.7" y="7.62" visible="off" length="short"/>
+<pin name="AOUT/IN" x="-12.7" y="5.08" visible="off" length="short"/>
+<pin name="BOUT/IN" x="-12.7" y="2.54" visible="off" length="short"/>
+<pin name="BIN/OUT" x="-12.7" y="0" visible="off" length="short"/>
+<pin name="CON_B" x="-12.7" y="-2.54" visible="off" length="short"/>
+<pin name="CON_C" x="-12.7" y="-5.08" visible="off" length="short"/>
+<pin name="VSS" x="-12.7" y="-7.62" visible="off" length="short"/>
+<pin name="CIN/OUT" x="12.7" y="-7.62" visible="off" length="short" rot="R180"/>
+<pin name="COUT/IN" x="12.7" y="-5.08" visible="off" length="short" rot="R180"/>
+<pin name="DOUT/IN" x="12.7" y="-2.54" visible="off" length="short" rot="R180"/>
+<pin name="DIN/OUT" x="12.7" y="0" visible="off" length="short" rot="R180"/>
+<pin name="CON_D" x="12.7" y="2.54" visible="off" length="short" rot="R180"/>
+<pin name="CON_A" x="12.7" y="5.08" visible="off" length="short" rot="R180"/>
+<pin name="VDD" x="12.7" y="7.62" visible="off" length="short" rot="R180"/>
+<text x="-7.62" y="7.62" size="1.016" layer="95">A IN/OUT</text>
+<text x="-7.62" y="5.08" size="1.016" layer="95">A OUT/IN</text>
+<text x="-7.62" y="2.54" size="1.016" layer="95">B OUT/IN</text>
+<text x="-7.62" y="0" size="1.016" layer="95">B IN/OUT</text>
+<text x="-7.62" y="-2.54" size="1.016" layer="95">CON B</text>
+<text x="-7.62" y="-5.08" size="1.016" layer="95">CON C</text>
+<text x="-7.62" y="-7.62" size="1.016" layer="95">Vss</text>
+<text x="5.08" y="7.62" size="1.016" layer="95">Vdd</text>
+<text x="5.08" y="5.08" size="1.016" layer="95">CON A</text>
+<text x="5.08" y="2.54" size="1.016" layer="95">CON D</text>
+<text x="2.54" y="0" size="1.016" layer="95">D IN/OUT</text>
+<text x="2.54" y="-2.54" size="1.016" layer="95">D OUT/IN</text>
+<text x="2.54" y="-5.08" size="1.016" layer="95">C OUT/IN</text>
+<text x="2.54" y="-7.62" size="1.016" layer="95">C IN/OUT</text>
+<wire x1="-10.16" y1="10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-10.16" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-10.16" x2="10.16" y2="10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="10.16" x2="-10.16" y2="10.16" width="0.254" layer="94"/>
+<circle x="-8.8392" y="8.8392" radius="0.75048125" width="0.254" layer="94"/>
+<text x="-10.0076" y="10.795" size="1.27" layer="95">&gt;NAME</text>
+<text x="-9.5758" y="-11.6078" size="1.27" layer="96">&gt;VALUE</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="NTE-R56-1D.5-6" prefix="IC" uservalue="yes">
@@ -1634,6 +1695,34 @@
 <connect gate="G$1" pin="VDD" pad="1"/>
 <connect gate="G$1" pin="VSS" pad="14"/>
 <connect gate="G$1" pin="W" pad="11"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="CD4066">
+<gates>
+<gate name="G$1" symbol="CD4066" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="CD4066">
+<connects>
+<connect gate="G$1" pin="AIN/OUT" pad="P$1"/>
+<connect gate="G$1" pin="AOUT/IN" pad="P$2"/>
+<connect gate="G$1" pin="BIN/OUT" pad="P$4"/>
+<connect gate="G$1" pin="BOUT/IN" pad="P$3"/>
+<connect gate="G$1" pin="CIN/OUT" pad="P$8"/>
+<connect gate="G$1" pin="CON_A" pad="P$13"/>
+<connect gate="G$1" pin="CON_B" pad="P$5"/>
+<connect gate="G$1" pin="CON_C" pad="P$6"/>
+<connect gate="G$1" pin="CON_D" pad="P$12"/>
+<connect gate="G$1" pin="COUT/IN" pad="P$9"/>
+<connect gate="G$1" pin="DIN/OUT" pad="P$11"/>
+<connect gate="G$1" pin="DOUT/IN" pad="P$10"/>
+<connect gate="G$1" pin="VDD" pad="P$14"/>
+<connect gate="G$1" pin="VSS" pad="P$7"/>
 </connects>
 <technologies>
 <technology name=""/>
