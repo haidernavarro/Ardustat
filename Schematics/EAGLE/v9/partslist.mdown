@@ -1,0 +1,47 @@
+#Controller Unit
+Any Arduino compatible circuit -> board layouts from arduino v3 on up
+
+#Parts
+DAC - 
+	MAX 5250 http://www.maxim-ic.com/quick_view2.cfm/qv_pk/1650
+POT - 
+	Microchip MCP4261 http://www.microchip.com/wwwproducts/Devices.aspx?dDocName=en531252
+Relay - 
+	526-R561D.56 NTE General Purpose Relays http://www.mouser.com/Search/Refine.aspx?Keyword=526-R561D.56+NTE+General+Purpose+Relays
+
+Resistors -
+	(2) 100 Ohm SMD 1206
+	(4) 10 kOhm SMD 1206
+	(2) 590 Ohm SMD 1206 (as exact as possible)
+	(2) 5.76 KOhm SMD 1206
+	(1) 41.2 Ohm SMD 1206 (as exact as possible)
+	
+	
+Capacitor - 
+	EEU-FC1E331(Can be switched with any from the PTH12000 datasheet list)  -
+	http://www.digikey.com/scripts/DkSearch/dksus.dll?WT.z_header=search_go&lang=en&keywords=P10273-ND&x=0&y=0&cur=USD
+	
+OP-Amps -
+	(2) OPA569 http://www.ti.com/product/opa569
+	
+Voltage Reference -	
+	MAX6250 http://www.maxim-ic.com/datasheet/index.mvp/id/1657
+	
+Transimpedance Amp - 
+	OPA2380 http://www.ti.com/product/opa2380
+	
+Voltage Regulator - 
+	PTH12000W http://www.ti.com/product/pth12000w
+	
+LED -
+	One Led (For location/debugging)
+	
+IO Pins -
+	(3 x 2 pin)Screw Terminals: https://www.sparkfun.com/products/8084
+	40-Pin Breakaways A26509-40-ND
+		Cut into 8-8-6-4
+	(2) Female Headers for optional resistance (3 x 1)
+	
+
+	
+
