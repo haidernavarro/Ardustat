@@ -4,6 +4,7 @@ Authors:
 
 - Barry Van Tassell <bajavata@gmail.com>
 - Eddie Nolan <tapd260@gmail.com>
+- Sankha Ghatak
 - Dan Steingart <dan.steingart@gmail.com>
 - Balasubramanian Anantharaman <balaanantharaman@gmail.com>
 - Rigers Qeraj <rigersqeraj@gmail.com>
